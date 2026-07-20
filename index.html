@@ -10,12 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
     :root {
-      --font-main: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-main: 'Quicksand', sans-serif;
       --color-white: #ffffff;
       --color-dark: #111111;
     }
@@ -25,29 +23,26 @@
     body {
       font-family: var(--font-main);
       color: var(--color-white);
-      background-color: #0b0e14;
+      background-color: #0d1117;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* HEROFRAME LAYOUT - STRUTTURA CENTRATA ED ELEGANTE */
+    /* SFONDO & LAYOUT PRINCIPALE */
     .hero-landing {
       position: relative;
       width: 100vw;
       height: 100vh;
-      /* SFONDO SOFT SFUMATO PERMETTE DI LEGGERE IL TESTO CON CHIARITA' */
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25)), 
+      background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), 
                   url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      padding: 45px 20px 40px 20px;
+      padding: 40px 20px 60px 20px;
       text-align: center;
     }
 
-    /* HEADER & BADGE LOGO */
     header {
       display: flex;
       flex-direction: column;
@@ -55,40 +50,34 @@
       width: 100%;
     }
 
+    /* BADGE LOGO IN ALTO (Identico all'originale) */
     .logo-container {
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
 
     .brand-badge {
       display: inline-block;
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      border-radius: 7px;
-      padding: 2px 16px 3px 16px;
-      font-size: 0.85rem;
-      letter-spacing: 2.5px;
-      text-transform: lowercase;
-      font-weight: 400;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      padding: 4px 18px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      font-weight: 500;
       color: var(--color-white);
       text-decoration: none;
-      backdrop-filter: blur(3px);
-      transition: all 0.25s ease;
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
       cursor: pointer;
     }
 
     .brand-badge:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
     }
 
-    .brand-badge img {
-      max-height: 22px;
-      vertical-align: middle;
-    }
-
-    /* NAVIGAZIONE */
+    /* MENU NAVIGAZIONE */
     nav {
       display: flex;
-      gap: 36px;
+      gap: 32px;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
@@ -96,82 +85,88 @@
 
     nav a {
       position: relative;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.95);
       text-decoration: none;
-      font-size: 0.98rem;
+      font-size: 1.1rem;
       font-weight: 400;
-      letter-spacing: 0.8px;
-      padding-bottom: 5px;
-      transition: color 0.25s ease;
+      letter-spacing: 0.5px;
+      padding-bottom: 4px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+      transition: color 0.3s ease;
       cursor: pointer;
     }
 
-    /* LINEA SOTTILISSIMA ANIMATA SOTTO AL MENU */
     nav a::after {
       content: '';
       position: absolute;
       width: 0%;
-      height: 1px;
+      height: 1.5px;
       bottom: 0;
       left: 0;
       background-color: var(--color-white);
-      transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: width 0.3s ease-in-out;
     }
 
-    nav a:hover::after, 
-    nav a.active::after { 
+    nav a:hover::after, nav a.active::after { 
       width: 100%; 
     }
 
-    nav a:hover { 
-      color: #ffffff; 
-    }
-
-    /* TITOLO E SLOGAN CENTRALI */
+    /* TITOLO PRINCIPALE & DIGITAL ARTIST */
     .hero-center {
       margin: auto 0;
-      transform: translateY(-10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hero-title {
-      font-size: clamp(3.2rem, 7.5vw, 5.8rem);
-      font-weight: 300;
-      letter-spacing: 0.5px;
+      font-size: clamp(3.5rem, 8.5vw, 6.5rem);
+      font-weight: 300; /* Molto leggero e pulito */
+      letter-spacing: 1px;
       line-height: 1.1;
-      margin-bottom: 12px;
-      color: var(--color-white);
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      margin-bottom: 25px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .hero-subtitle {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: 300;
-      letter-spacing: 0.8px;
-      margin-bottom: 22px;
-      color: rgba(255, 255, 255, 0.88);
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.92);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* SOCIAL NETWORK CON SPAZIATURA ED EFFETTI SOFT */
+    /* PULSANTI SOCIAL GRAFICAMENTE IDENTICI ALL'IMMAGINE */
     .social-links {
       display: flex;
-      gap: 22px;
+      gap: 12px;
       justify-content: center;
       align-items: center;
     }
 
-    .social-links a {
-      color: rgba(255, 255, 255, 0.85);
-      font-size: 1.15rem;
+    .social-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-radius: 8px; /* quadratino dai bordi arrotondati */
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.95rem;
       text-decoration: none;
+      backdrop-filter: blur(2px);
       transition: all 0.25s ease;
     }
 
-    .social-links a:hover {
-      color: #ffffff;
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
       transform: translateY(-2px);
+      color: #ffffff;
     }
 
-    /* SEZIONI INTERNE */
+    /* STRUTTURA DELLE PAGINE INTERNE */
     .page-content {
       display: none;
       background-color: #ffffff;
@@ -203,7 +198,7 @@
 
     .back-btn:hover { background: #111; color: #fff; }
 
-    .page-title { font-weight: 300; font-size: 2rem; letter-spacing: 0.5px; }
+    .page-title { font-weight: 300; font-size: 2.2rem; }
 
     .cards-grid {
       display: grid;
@@ -228,10 +223,10 @@
     }
 
     .card-body { padding: 20px; }
-    .card-body h3 { font-weight: 400; margin-bottom: 8px; font-size: 1.15rem; }
+    .card-body h3 { font-weight: 400; margin-bottom: 8px; font-size: 1.2rem; }
     .card-body p { color: #666; font-size: 0.9rem; line-height: 1.5; }
 
-    .form-wrapper { max-width: 520px; margin: 0 auto; }
+    .form-wrapper { max-width: 550px; margin: 0 auto; }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: #555; }
     .form-group input, .form-group textarea {
@@ -244,10 +239,12 @@
   <!-- HOMEPAGE HERO -->
   <div id="homePage" class="hero-landing">
     <header>
+      <!-- LOGO BADGE IN ALTO -->
       <div class="logo-container">
-        <!-- LOGO BADGE ELEGANTE -->
         <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">DarkManga</a>
       </div>
+
+      <!-- MENU DI NAVIGAZIONE -->
       <nav>
         <a class="active" onclick="switchPage('homePage')">Home</a>
         <a onclick="switchPage('galleryPage')">Gallery</a>
@@ -258,17 +255,28 @@
       </nav>
     </header>
 
-    <!-- TITOLO PRINCIPALE ED ELEGANTE -->
+    <!-- TESTO CENTRALE & ICONE SOCIAL CON BADGE ARROTONDATI -->
     <div class="hero-center">
       <h1 class="hero-title" id="siteTitle">Art by Scar</h1>
-      <p class="hero-subtitle" id="siteSlogan">Manga Artist & Illustrator</p>
+      <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
       
+      <!-- ICONE SOCIAL DENTRO I RIQUADRI ARROTONDATI -->
       <div class="social-links" id="socialBox">
-        <!-- Social popolati da JS -->
+        <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="mailto:tuamail@esempio.com" class="social-btn" title="Email">
+          <i class="fa-regular fa-envelope"></i>
+        </a>
+        <a href="https://mastodon.social" target="_blank" class="social-btn" title="Mastodon">
+          <i class="fa-brands fa-mastodon"></i>
+        </a>
+        <a href="https://linktr.ee" target="_blank" class="social-btn" title="Linktree">
+          <i class="fa-regular fa-bookmark"></i>
+        </a>
       </div>
     </div>
 
-    <!-- BILANCIAMENTO SPAZIATURA BOTTOM -->
     <div></div>
   </div>
 
@@ -287,8 +295,8 @@
       <h2 class="page-title">About Scar</h2>
       <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     </div>
-    <div style="max-width: 650px; margin: 0 auto;">
-      <p id="bioText" style="line-height: 1.8; color: #444; font-weight: 300; font-size: 1.05rem;"></p>
+    <div style="max-width: 680px; margin: 0 auto;">
+      <p id="bioText" style="line-height: 1.8; color: #444; font-weight: 300; font-size: 1.1rem;"></p>
     </div>
   </div>
 
@@ -319,9 +327,9 @@
         </div>
         <div class="form-group">
           <label>Messaggio</label>
-          <textarea name="message" rows="5" required placeholder="Descrivi l'idea per la commissione..."></textarea>
+          <textarea name="message" rows="5" required placeholder="Descrivi la commissione..."></textarea>
         </div>
-        <button type="submit" style="background:#111; color:#fff; border:none; padding:12px 24px; cursor:pointer; width:100%; border-radius:6px; font-family:var(--font-main);">Invia Richiesta</button>
+        <button type="submit" style="background:#111; color:#fff; border:none; padding:12px 24px; cursor:pointer; width:100%; border-radius:6px; font-family:var(--font-main);">Invia</button>
       </form>
     </div>
   </div>
@@ -351,17 +359,10 @@
     }
 
     if (typeof infoArtista !== 'undefined') {
-      document.getElementById('siteLogo').innerText = infoArtista.nomeLogo || "DarkManga";
-      document.getElementById('siteTitle').innerText = infoArtista.nome || "Art by Scar";
-      document.getElementById('siteSlogan').innerText = infoArtista.slogan || "Manga Artist & Illustrator";
-      document.getElementById('bioText').innerText = infoArtista.biografia;
-
-      const socialBox = document.getElementById('socialBox');
-      socialBox.innerHTML = '';
-      if (infoArtista.instagram) socialBox.innerHTML += `<a href="${infoArtista.instagram}" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>`;
-      if (infoArtista.email) socialBox.innerHTML += `<a href="mailto:${infoArtista.email}" title="Email"><i class="fa-regular fa-envelope"></i></a>`;
-      if (infoArtista.mastodon) socialBox.innerHTML += `<a href="${infoArtista.mastodon}" target="_blank" title="Mastodon"><i class="fa-brands fa-mastodon"></i></a>`;
-      if (infoArtista.linktree) socialBox.innerHTML += `<a href="${infoArtista.linktree}" target="_blank" title="Linktree"><i class="fa-regular fa-bookmark"></i></a>`;
+      if(infoArtista.nomeLogo) document.getElementById('siteLogo').innerText = infoArtista.nomeLogo;
+      if(infoArtista.nome) document.getElementById('siteTitle').innerText = infoArtista.nome;
+      if(infoArtista.slogan) document.getElementById('siteSlogan').innerText = infoArtista.slogan;
+      if(infoArtista.biografia) document.getElementById('bioText').innerText = infoArtista.biografia;
     }
 
     const galleryGrid = document.getElementById('galleryGrid');
