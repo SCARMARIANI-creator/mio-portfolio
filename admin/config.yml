@@ -6,30 +6,55 @@ media_folder: "immagini"
 public_folder: "immagini"
 
 collections:
-  # 1. Impostazioni Generali del Sito (Slogan, Logo, Social)
+  # 1. Impostazioni Generali, Logo, Slogan, Social e About
   - name: "impostazioni"
-    label: "Impostazioni Sito & Social"
+    label: "Info Sito & Social"
     files:
       - file: "contenuto/info.yml"
-        label: "Info Personali e Social"
+        label: "Informazioni Artista e Social"
         name: "info_personali"
         fields:
-          - { label: "Nome Artista / Badge Logo", name: "nome_logo", widget: "string", default: "Art by Rhien" }
+          - { label: "Nome Artista / Titolo", name: "nome_logo", widget: "string", default: "Art by Rhien" }
           - { label: "Slogan / Sottotitolo", name: "slogan", widget: "string", default: "Digital Artist" }
           - { label: "Link Instagram", name: "instagram", widget: "string", required: false }
           - { label: "Email di Contatto", name: "email", widget: "string", required: false }
-          - { label: "Link Mastodon / Altro Social", name: "mastodon", widget: "string", required: false }
-          - { label: "Link Portfolio Extra / Linktree", name: "linktree", widget: "string", required: false }
-          - { label: "Biografia (Sezione About)", name: "biografia", widget: "text", required: false }
+          - { label: "Link Mastodon", name: "mastodon", widget: "string", required: false }
+          - { label: "Linktree / Portfolio Extra", name: "linktree", widget: "string", required: false }
+          - { label: "Biografia (Pagina About)", name: "biografia", widget: "text", required: false }
 
-  # 2. Gestione Galleria Disegni
+  # 2. Galleria Disegni
   - name: "disegni"
-    label: "I Miei Disegni"
+    label: "Galleria Disegni"
     folder: "contenuto/disegni"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Titolo Opera", name: "title", widget: "string" }
-      - { label: "Tecnica / Categoria", name: "tecnica", widget: "string" }
+      - { label: "Tecnica / Categoria", name: "tecnica", widget: "string", required: false }
       - { label: "Immagine", name: "immagine", widget: "image" }
-      - { label: "Descrizione", name: "concetto", widget: "text", required: false }
+      - { label: "Descrizione / Concetto", name: "concetto", widget: "text", required: false }
+
+  # 3. Pagina Eventi / Mostre
+  - name: "eventi"
+    label: "Eventi & Mostre"
+    folder: "contenuto/eventi"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome Evento", name: "title", widget: "string" }
+      - { label: "Data o Periodo", name: "data_evento", widget: "string" }
+      - { label: "Luogo / Città", name: "luogo", widget: "string" }
+      - { label: "Descrizione", name: "descrizione", widget: "text", required: false }
+      - { label: "Link Evento / Biglietti", name: "link_evento", widget: "string", required: false }
+
+  # 4. Pagina Shop / Articoli
+  - name: "shop"
+    label: "Shop & Stampe"
+    folder: "contenuto/shop"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome Prodotto / Stampa", name: "title", widget: "string" }
+      - { label: "Prezzo", name: "prezzo", widget: "string" }
+      - { label: "Immagine Prodotto", name: "immagine", widget: "image" }
+      - { label: "Link per Acquistare (Etsy/INPRNT/Store)", name: "link_acquisto", widget: "string" }
