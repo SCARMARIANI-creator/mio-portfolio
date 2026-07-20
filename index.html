@@ -1,296 +1,35 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Art by Rhien</title>
-  
-  <!-- Font pulito e arrotondato tipo Quicksand / Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Icone FontAwesome per i social -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Netlify Identity Widget per /admin -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+backend:
+  name: git-gateway
+  branch: main
 
-  <style>
-    :root {
-      --font: 'Quicksand', sans-serif;
-      --text-color: #ffffff;
-      --overlay-light: rgba(255, 255, 255, 0.15);
-    }
+media_folder: "immagini"
+public_folder: "immagini"
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+collections:
+  # 1. Impostazioni Generali del Sito (Slogan, Logo, Social)
+  - name: "impostazioni"
+    label: "Impostazioni Sito & Social"
+    files:
+      - file: "contenuto/info.yml"
+        label: "Info Personali e Social"
+        name: "info_personali"
+        fields:
+          - { label: "Nome Artista / Badge Logo", name: "nome_logo", widget: "string", default: "Art by Rhien" }
+          - { label: "Slogan / Sottotitolo", name: "slogan", widget: "string", default: "Digital Artist" }
+          - { label: "Link Instagram", name: "instagram", widget: "string", required: false }
+          - { label: "Email di Contatto", name: "email", widget: "string", required: false }
+          - { label: "Link Mastodon / Altro Social", name: "mastodon", widget: "string", required: false }
+          - { label: "Link Portfolio Extra / Linktree", name: "linktree", widget: "string", required: false }
+          - { label: "Biografia (Sezione About)", name: "biografia", widget: "text", required: false }
 
-    body {
-      font-family: var(--font);
-      color: var(--text-color);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* SFONDO COPERTINA A TUTTO SCHERMO */
-    .hero-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      /* Puoi sostituire questo URL con l'immagine di sfondo che preferisci */
-      background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), 
-                  url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 30px 20px;
-      text-align: center;
-    }
-
-    /* HEADER & NAVIGAZIONE */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      z-index: 10;
-    }
-
-    /* BADGE LOGO RIQUADRATO IN ALTO */
-    .logo-badge {
-      border: 1.5px solid rgba(255, 255, 255, 0.8);
-      border-radius: 8px;
-      padding: 4px 14px;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: lowercase;
-      font-weight: 500;
-      backdrop-filter: blur(2px);
-    }
-
-    /* MENU DI NAVIGAZIONE */
-    nav {
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    nav a {
-      color: rgba(255, 255, 255, 0.9);
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.15);
-    }
-
-    nav a:hover, nav a.active {
-      color: #ffffff;
-      transform: translateY(-1px);
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    /* TESTO CENTRALE HERO */
-    .hero-main {
-      margin: auto 0;
-      z-index: 10;
-    }
-
-    .hero-title {
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      font-weight: 300;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      line-height: 1.1;
-    }
-
-    .hero-subtitle {
-      font-size: 1.3rem;
-      font-weight: 300;
-      letter-spacing: 1px;
-      margin-bottom: 25px;
-      opacity: 0.9;
-    }
-
-    /* ICONE SOCIAL IN BASSO */
-    .social-icons {
-      display: flex;
-      gap: 18px;
-      justify-content: center;
-    }
-
-    .social-icons a {
-      color: #ffffff;
-      font-size: 1.2rem;
-      transition: transform 0.2s ease, opacity 0.2s;
-      opacity: 0.85;
-    }
-
-    .social-icons a:hover {
-      opacity: 1;
-      transform: scale(1.15);
-    }
-
-    /* SEZIONE CONTENUTI (GALLERIA, ABOUT, ETC) */
-    .content-section {
-      display: none;
-      background: #ffffff;
-      color: #111111;
-      min-height: 100vh;
-      padding: 80px 40px 40px 40px;
-    }
-
-    .content-section.active {
-      display: block;
-    }
-
-    /* MASONRY GALLERIA */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .art-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px;
-      transition: transform 0.3s;
-    }
-
-    .art-item:hover img {
-      transform: scale(1.02);
-    }
-
-    /* FORM CONTATTI / COMMISSIONS */
-    .form-container {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: var(--font);
-    }
-
-    .btn-submit {
-      background: #111;
-      color: #fff;
-      padding: 12px 24px;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- 1. HOME HERO (STILE RHIENON) -->
-  <div id="home" class="hero-container">
-    
-    <header>
-      <div class="logo-badge">rhienon</div>
-      <nav>
-        <a href="#" class="active" onclick="showPage('home')">Home</a>
-        <a href="#" onclick="showPage('gallery')">Gallery</a>
-        <a href="#" onclick="showPage('about')">About</a>
-        <a href="#" onclick="showPage('events')">Events</a>
-        <a href="#" onclick="showPage('commissions')">Commissions</a>
-        <a href="#" onclick="showPage('shop')">Shop</a>
-      </nav>
-    </header>
-
-    <div class="hero-main">
-      <h1 class="hero-title">Art by Rhien</h1>
-      <p class="hero-subtitle">Digital Artist</p>
-      
-      <div class="social-icons">
-        <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-        <a href="mailto:tuaemail@esempio.com"><i class="fa-regular fa-envelope"></i></a>
-        <a href="#"><i class="fa-brands fa-mastodon"></i></a>
-        <a href="#"><i class="fa-regular fa-bookmark"></i></a>
-      </div>
-    </div>
-
-    <div><!-- Spaziatore vuoto per centratura --></div>
-  </div>
-
-  <!-- 2. GALLERIA -->
-  <div id="gallery" class="content-section">
-    <button onclick="showPage('home')" style="margin-bottom:20px; padding:8px 16px; cursor:pointer;">&larr; Torna alla Home</button>
-    <h2 style="margin-bottom:30px; font-weight:400;">Gallery</h2>
-    <div class="gallery-grid" id="galleryContainer"></div>
-  </div>
-
-  <!-- 3. ABOUT -->
-  <div id="about" class="content-section">
-    <button onclick="showPage('home')" style="margin-bottom:20px; padding:8px 16px; cursor:pointer;">&larr; Torna alla Home</button>
-    <h2 style="margin-bottom:20px; font-weight:400;">About</h2>
-    <p id="bioContent">Caricamento informazioni bio...</p>
-  </div>
-
-  <!-- 4. COMMISSIONS / CONTACT -->
-  <div id="commissions" class="content-section">
-    <button onclick="showPage('home')" style="margin-bottom:20px; padding:8px 16px; cursor:pointer;">&larr; Torna alla Home</button>
-    <div class="form-container">
-      <h2 style="margin-bottom:20px; font-weight:400;">Commissions</h2>
-      <form action="https://formspree.io/f/moqgqgyy" method="POST">
-        <div class="form-group">
-          <input type="text" name="name" placeholder="Il tuo nome" required>
-        </div>
-        <div class="form-group">
-          <input type="email" name="email" placeholder="La tua email" required>
-        </div>
-        <div class="form-group">
-          <textarea name="message" rows="5" placeholder="Dettagli sulla commissione..." required></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Invia Richiesta</button>
-      </form>
-    </div>
-  </div>
-
-  <script src="disegni.js"></script>
-  <script>
-    function showPage(pageId) {
-      if (pageId === 'home') {
-        document.getElementById('home').style.display = 'flex';
-        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-      } else {
-        document.getElementById('home').style.display = 'none';
-        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-        const target = document.getElementById(pageId);
-        if (target) target.classList.add('active');
-      }
-      window.scrollTo(0, 0);
-    }
-
-    // Caricamento Disegni
-    const galleryContainer = document.getElementById('galleryContainer');
-    if (typeof mieiDisegni !== 'undefined') {
-      mieiDisegni.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'art-item';
-        div.innerHTML = `<img src="${item.immagine}" alt="${item.titolo}">`;
-        galleryContainer.appendChild(div);
-      });
-    }
-
-    if (typeof infoArtista !== 'undefined') {
-      document.getElementById('bioContent').innerText = infoArtista.biografia;
-    }
-  </script>
-</body>
-</html>
+  # 2. Gestione Galleria Disegni
+  - name: "disegni"
+    label: "I Miei Disegni"
+    folder: "contenuto/disegni"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titolo Opera", name: "title", widget: "string" }
+      - { label: "Tecnica / Categoria", name: "tecnica", widget: "string" }
+      - { label: "Immagine", name: "immagine", widget: "image" }
+      - { label: "Descrizione", name: "concetto", widget: "text", required: false }
