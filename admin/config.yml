@@ -2,10 +2,27 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "immagini" # Cartella dove verranno salvate le foto caricate dal pannello
+media_folder: "immagini"
 public_folder: "immagini"
 
 collections:
+  # 1. Impostazioni Generali del Sito (Slogan, Logo, Social)
+  - name: "impostazioni"
+    label: "Impostazioni Sito & Social"
+    files:
+      - file: "contenuto/info.yml"
+        label: "Info Personali e Social"
+        name: "info_personali"
+        fields:
+          - { label: "Nome Artista / Badge Logo", name: "nome_logo", widget: "string", default: "Art by Rhien" }
+          - { label: "Slogan / Sottotitolo", name: "slogan", widget: "string", default: "Digital Artist" }
+          - { label: "Link Instagram", name: "instagram", widget: "string", required: false }
+          - { label: "Email di Contatto", name: "email", widget: "string", required: false }
+          - { label: "Link Mastodon / Altro Social", name: "mastodon", widget: "string", required: false }
+          - { label: "Link Portfolio Extra / Linktree", name: "linktree", widget: "string", required: false }
+          - { label: "Biografia (Sezione About)", name: "biografia", widget: "text", required: false }
+
+  # 2. Gestione Galleria Disegni
   - name: "disegni"
     label: "I Miei Disegni"
     folder: "contenuto/disegni"
@@ -15,5 +32,4 @@ collections:
       - { label: "Titolo Opera", name: "title", widget: "string" }
       - { label: "Tecnica / Categoria", name: "tecnica", widget: "string" }
       - { label: "Immagine", name: "immagine", widget: "image" }
-      - { label: "Concetto e Stile", name: "concetto", widget: "text" }
-      - { label: "Dettagli Tecnici", name: "dettagliTecnici", widget: "text", required: false }
+      - { label: "Descrizione", name: "concetto", widget: "text", required: false }
