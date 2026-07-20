@@ -4,72 +4,240 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Il Mio Portfolio Artistico</title>
+  
+  <!-- Font elegante da Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
+    /* STILI GENERALI */
+    :root {
+      --bg-color: #f8f6f0;
+      --card-bg: #ffffff;
+      --text-main: #1a1a1a;
+      --text-muted: #666666;
+      --accent: #8c7355;
+      --border-color: #e5e0d8;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
       margin: 0;
       padding: 20px;
+      -webkit-font-smoothing: antialiased;
     }
 
     header {
       text-align: center;
-      padding: 40px 0;
+      padding: 60px 20px 40px;
     }
 
-    /* Griglia reattiva per i disegni */
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* GRIGLIA GALLERIA */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 35px;
+      max-width: 1300px;
       margin: 0 auto;
+      padding: 20px;
     }
 
+    /* CARD ANTEPRIMA */
     .card {
-      background: white;
-      border-radius: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-img-wrapper {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
     }
 
     .card img {
       width: 100%;
-      height: 250px;
+      height: 100%;
       object-fit: cover;
-      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
     }
 
     .card-info {
-      padding: 15px;
+      padding: 25px;
     }
 
     .card-info h3 {
-      margin: 0 0 5px 0;
-      font-size: 1.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      margin: 0 0 8px 0;
     }
 
     .card-info .tag {
       display: inline-block;
-      background: #e9ecef;
-      color: #495057;
-      font-size: 0.8rem;
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin-bottom: 8px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      font-weight: 500;
     }
 
     .card-info p {
       margin: 0;
       font-size: 0.9rem;
-      color: #6c757d;
+      color: var(--text-muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
+    }
+
+    /* MODALE FINISTRA INGRANDITA */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(8px);
+      overflow-y: auto;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .modal-content {
+      background-color: var(--bg-color);
+      width: 100%;
+      max-width: 1100px;
+      max-height: 90vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    @media (min-width: 850px) {
+      .modal-content {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      color: var(--text-main);
+      cursor: pointer;
+      z-index: 10;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .close-modal:hover {
+      color: var(--accent);
+    }
+
+    .modal-image-container {
+      background-color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 80vh;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-height: 80vh;
+    }
+
+    .modal-details {
+      padding: 50px 40px;
+      overflow-y: auto;
+      max-height: 80vh;
+      box-sizing: border-box;
+    }
+
+    .modal-details h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      margin: 0 0 10px 0;
+      letter-spacing: 1px;
+    }
+
+    .modal-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 5px;
+      margin: 20px 0 10px 0;
+      color: var(--text-main);
+    }
+
+    .modal-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #444;
+      margin: 0 0 20px 0;
     }
   </style>
 </head>
@@ -77,29 +245,84 @@
 
   <header>
     <h1>Portfolio Artistico</h1>
-    <p>Una selezione delle mie opere e illustrazioni</p>
+    <p>Opere, illustrazioni e progetti visivi</p>
   </header>
 
   <main class="gallery" id="galleria"></main>
 
+  <!-- STRUTTURA MODALE -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      
+      <div class="modal-image-container">
+        <img src="" alt="" id="modalImage" class="modal-image">
+      </div>
+      
+      <div class="modal-details">
+        <h2 id="modalTitle"></h2>
+        <span id="modalTag" class="modal-tag"></span>
+
+        <div class="section-title">Concetto e Stile</div>
+        <p id="modalConcept" class="modal-text"></p>
+
+        <div class="section-title">Dettagli Tecnici</div>
+        <p id="modalDetails" class="modal-text"></p>
+      </div>
+    </div>
+  </div>
+
   <script src="disegni.js"></script>
   <script>
     const galleria = document.getElementById('galleria');
+    const modal = document.getElementById('projectModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalTag = document.getElementById('modalTag');
+    const modalConcept = document.getElementById('modalConcept');
+    const modalDetails = document.getElementById('modalDetails');
+    const closeBtn = document.querySelector('.close-modal');
 
-    // Genera automaticamente le schede dai dati
-    mieiDisegni.forEach(disegno => {
+    // Genera le card
+    mieiDisegni.forEach((disegno) => {
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML = `
-        <img src="${disegno.immagine}" alt="${disegno.titolo}" loading="lazy">
+        <div class="card-img-wrapper">
+          <img src="${disegno.immagine}" alt="${disegno.titolo}" loading="lazy">
+        </div>
         <div class="card-info">
           <h3>${disegno.titolo}</h3>
           <span class="tag">${disegno.tecnica}</span>
-          <p>${disegno.descrizione}</p>
+          <p>${disegno.concetto || disegno.descrizione}</p>
         </div>
       `;
       galleria.appendChild(card);
+
+      card.addEventListener('click', () => openModal(disegno));
     });
+
+    function openModal(progetto) {
+      modalImage.src = progetto.immagine;
+      modalImage.alt = progetto.titolo;
+      modalTitle.innerText = progetto.titolo;
+      modalTag.innerText = progetto.tecnica;
+      
+      modalConcept.innerText = progetto.concetto || progetto.descrizione;
+      modalDetails.innerText = progetto.dettagliTecnici || "Nessun dettaglio tecnico specificato.";
+      
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   </script>
 </body>
 </html>
