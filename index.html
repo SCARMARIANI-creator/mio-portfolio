@@ -3,447 +3,422 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Artistico</title>
+  <title>Portfolio</title>
   
-  <!-- Typography Minimalista -->
+  <!-- Font Inter per uno stile editoriale e pulito -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   
-  <!-- Netlify Identity Widget per login da /admin -->
+  <!-- Netlify Identity Widget per il pannello /admin -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
     :root {
       --bg: #ffffff;
-      --text: #0d0d0d;
+      --text: #111111;
       --muted: #888888;
-      --border: #f0f0f0;
+      --border: #eeeeee;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font);
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      padding: 40px 30px;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER & NAVIGATION BAR */
-    header {
-      max-width: 1400px;
-      margin: 0 auto 60px auto;
+    /* LAYOUT A DUE COLONNE (STILE RHIENON) */
+    .site-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 25px;
+      min-height: 100vh;
     }
 
-    .brand {
-      font-size: 1rem;
+    /* SIDEBAR SINISTRA (FISSA) */
+    sidebar {
+      width: 280px;
+      padding: 50px 40px;
+      position: fixed;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+    }
+
+    .brand-title {
+      font-size: 0.95rem;
       font-weight: 500;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--text);
+      display: block;
+      margin-bottom: 40px;
     }
 
-    nav a {
-      margin-left: 30px;
+    .nav-links {
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-bottom: 14px;
+    }
+
+    .nav-links a {
       text-decoration: none;
       color: var(--muted);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      transition: color 0.3s ease;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease;
     }
 
-    nav a:hover, nav a.active {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--text);
     }
 
-    /* SEZIONI PAGINA MULTI-TAB */
+    .sidebar-footer {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* CONTENUTO PRINCIPALE (A DESTRA) */
+    main {
+      margin-left: 280px;
+      flex: 1;
+      padding: 50px 60px;
+    }
+
     .page-section {
       display: none;
-      max-width: 1400px;
-      margin: 0 auto;
       opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.3s ease;
     }
 
     .page-section.active {
       display: block;
       opacity: 1;
-      transform: translateY(0);
     }
 
-    /* GRIGLIA ESPOSITIVA (STYLE ANA MOSCA) */
-    .gallery {
+    /* GALLERIA IMMAGINI (STYLE RHIENON) */
+    .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 50px 35px;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 40px;
     }
 
-    /* CARD CON MICRO-MOVIMENTO */
-    .card {
+    .art-card {
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
       text-decoration: none;
       color: inherit;
     }
 
-    .card-img-wrapper {
+    .art-image-wrapper {
       width: 100%;
       aspect-ratio: 3 / 4;
       overflow: hidden;
-      background-color: #f7f7f7;
-      margin-bottom: 16px;
-      position: relative;
+      background-color: #f9f9f9;
+      margin-bottom: 12px;
     }
 
-    .card img {
+    .art-image-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .card:hover img {
-      transform: scale(1.04);
+    .art-card:hover img {
+      transform: scale(1.03);
     }
 
-    .card-info {
+    .art-meta {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      padding-right: 5px;
+      font-size: 0.82rem;
     }
 
-    .card-info h3 {
-      font-size: 0.88rem;
+    .art-title { font-weight: 400; }
+    .art-category { color: var(--muted); font-weight: 300; }
+
+    /* SEZIONE ABOUT */
+    .about-content {
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    .about-content h2 {
+      font-size: 1.4rem;
       font-weight: 400;
-      letter-spacing: 0.5px;
-    }
-
-    .card-info .tag {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 300;
-    }
-
-    /* SEZIONE ABOUT / INFO */
-    .about-container {
-      max-width: 750px;
-      margin: 40px 0;
-    }
-
-    .about-container h2 {
-      font-size: 1.6rem;
-      font-weight: 400;
-      margin-bottom: 25px;
-      letter-spacing: -0.5px;
-    }
-
-    .about-container p {
-      font-size: 0.98rem;
-      color: #333;
       margin-bottom: 20px;
+    }
+
+    .about-content p {
+      font-size: 0.95rem;
+      color: #333;
       line-height: 1.8;
       font-weight: 300;
+      margin-bottom: 20px;
     }
 
-    /* FORM CONTATTI & RICHIESTE */
-    .contact-container {
-      max-width: 550px;
-      margin: 40px 0;
+    /* SEZIONE CONTATTI */
+    .contact-content {
+      max-width: 480px;
+      margin-top: 20px;
     }
 
-    .contact-container h2 {
-      font-size: 1.6rem;
+    .contact-content h2 {
+      font-size: 1.4rem;
       font-weight: 400;
       margin-bottom: 10px;
     }
 
-    .contact-container p {
+    .contact-content p {
+      font-size: 0.85rem;
       color: var(--muted);
-      font-size: 0.88rem;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
-    .form-group {
-      margin-bottom: 25px;
+    .field-group {
+      margin-bottom: 20px;
     }
 
-    .form-group label {
+    .field-group label {
       display: block;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .form-group input, 
-    .form-group textarea,
-    .form-group select {
+    .field-group input, 
+    .field-group textarea {
       width: 100%;
-      padding: 14px 0;
+      padding: 12px 0;
       border: none;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
       background: transparent;
       font-family: var(--font);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       outline: none;
       transition: border-color 0.3s;
-      border-radius: 0;
     }
 
-    .form-group input:focus, 
-    .form-group textarea:focus {
+    .field-group input:focus, 
+    .field-group textarea:focus {
       border-color: var(--text);
     }
 
-    button.btn-submit {
+    .submit-btn {
       background-color: var(--text);
       color: #fff;
       border: none;
-      padding: 16px 36px;
+      padding: 14px 28px;
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       cursor: pointer;
       margin-top: 10px;
-      transition: opacity 0.3s;
     }
 
-    button.btn-submit:hover { opacity: 0.8; }
-
-    /* MODALE / SCHERMATA INTERA PROGETTO */
-    .modal {
+    /* MODALE VISUALIZZAZIONE DETTAGLIO */
+    .modal-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: rgba(255, 255, 255, 0.98);
-      z-index: 2000;
+      background: rgba(255, 255, 255, 0.98);
+      z-index: 1000;
       overflow-y: auto;
-      opacity: 0;
-      transition: opacity 0.4s ease;
     }
 
-    .modal.show { display: block; opacity: 1; }
+    .modal-overlay.open { display: block; }
 
-    .close-modal {
+    .modal-close {
       position: fixed;
-      top: 35px; right: 40px;
-      font-size: 1.8rem;
-      font-weight: 300;
+      top: 30px; right: 40px;
+      font-size: 1.6rem;
       cursor: pointer;
-      z-index: 2010;
-      transition: transform 0.2s;
+      z-index: 1010;
     }
 
-    .close-modal:hover { transform: scale(1.1); }
-
-    .modal-container {
-      max-width: 1200px;
-      margin: 80px auto;
-      padding: 0 30px;
+    .modal-body {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 40px;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 60px;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
     }
 
-    @media (min-width: 900px) {
-      .modal-container { grid-template-columns: 1.3fr 1fr; }
-    }
-
-    .modal-image-container img {
+    .modal-body img {
       width: 100%;
       height: auto;
-      display: block;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
     }
 
-    .modal-details h2 {
-      font-size: 1.8rem;
+    .modal-info h3 {
+      font-size: 1.5rem;
       font-weight: 400;
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
-    }
-
-    .modal-tag {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 35px;
-    }
-
-    .detail-section { margin-bottom: 25px; }
-    .detail-section h4 {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--muted);
       margin-bottom: 8px;
     }
 
-    .detail-section p {
-      font-size: 0.92rem;
-      color: #333;
+    .modal-info .sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 30px;
+    }
+
+    .modal-info p {
+      font-size: 0.9rem;
       line-height: 1.7;
+      color: #444;
       font-weight: 300;
+    }
+
+    /* ADATTAMENTO MOBILE */
+    @media (max-width: 850px) {
+      .site-container { flex-direction: column; }
+      sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 30px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      main { margin-left: 0; padding: 30px 20px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .modal-body { grid-template-columns: 1fr; margin: 30px auto; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="#" class="brand" onclick="showSection('work')">MIO PORTFOLIO</a>
-    <nav>
-      <a href="#" id="nav-work" class="active" onclick="showSection('work')">Work</a>
-      <a href="#" id="nav-about" onclick="showSection('about')">About</a>
-      <a href="#" id="nav-contact" onclick="showSection('contact')">Contact</a>
-    </nav>
-  </header>
-
-  <!-- 1. GALLERIA -->
-  <section id="work" class="page-section active">
-    <div class="gallery" id="galleria"></div>
-  </section>
-
-  <!-- 2. ABOUT -->
-  <section id="about" class="page-section">
-    <div class="about-container">
-      <h2>Biologia & Filosofia</h2>
-      <p id="aboutText"></p>
-    </div>
-  </section>
-
-  <!-- 3. CONTATTI / INQUIRY -->
-  <section id="contact" class="page-section">
-    <div class="contact-container">
-      <h2>Richieste & Commissioni</h2>
-      <p>Invia un messaggio per informazioni su acquisti o collaborazioni.</p>
-      
-      <form id="contactForm" action="https://formspree.io/f/moqgqgyy" method="POST">
-        <div class="form-group">
-          <label>Nome Completo</label>
-          <input type="text" name="name" required placeholder="Inserisci il tuo nome">
-        </div>
-        <div class="form-group">
-          <label>Indirizzo Email</label>
-          <input type="email" name="email" required placeholder="email@esempio.com">
-        </div>
-        <div class="form-group">
-          <label>Tipologia Progetto</label>
-          <select name="type">
-            <option value="commissione">Commissione Disegno</option>
-            <option value="acquisto">Acquisto Opera</option>
-            <option value="collaborazione">Collaborazione</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Messaggio</label>
-          <textarea name="message" rows="4" required placeholder="Descrivi la tua richiesta..."></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Invia Richiesta</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- MODALE DETTAGLIO OPERA -->
-  <div id="projectModal" class="modal">
-    <span class="close-modal">&times;</span>
-    <div class="modal-container">
-      <div class="modal-image-container">
-        <img src="" id="modalImage" alt="">
+  <div class="site-container">
+    
+    <!-- SIDEBAR SINISTRA -->
+    <sidebar>
+      <div>
+        <a href="#" class="brand-title" onclick="switchTab('work')">IL TUO NOME</a>
+        <ul class="nav-links">
+          <li><a href="#" id="link-work" class="active" onclick="switchTab('work')">Work</a></li>
+          <li><a href="#" id="link-about" onclick="switchTab('about')">About</a></li>
+          <li><a href="#" id="link-contact" onclick="switchTab('contact')">Contact</a></li>
+        </ul>
       </div>
-      <div class="modal-details">
-        <h2 id="modalTitle"></h2>
-        <span id="modalTag" class="modal-tag"></span>
+      <div class="sidebar-footer">
+        &copy; <script>document.write(new Date().getFullYear())</script> All Rights Reserved.
+      </div>
+    </sidebar>
 
-        <div class="detail-section">
-          <h4>Concetto</h4>
-          <p id="modalConcept"></p>
-        </div>
+    <!-- AREA CONTENUTO DESTRO -->
+    <main>
+      
+      <!-- 1. WORK SECTION -->
+      <section id="work" class="page-section active">
+        <div class="gallery-grid" id="gridContainer"></div>
+      </section>
 
-        <div class="detail-section">
-          <h4>Dettagli Tecnici</h4>
-          <p id="modalDetails"></p>
+      <!-- 2. ABOUT SECTION -->
+      <section id="about" class="page-section">
+        <div class="about-content">
+          <h2>About</h2>
+          <p id="bioText">Caricamento biografia...</p>
         </div>
+      </section>
+
+      <!-- 3. CONTACT SECTION -->
+      <section id="contact" class="page-section">
+        <div class="contact-content">
+          <h2>Contact</h2>
+          <p>Invia un messaggio per info o richieste.</p>
+
+          <form action="https://formspree.io/f/moqgqgyy" method="POST">
+            <div class="field-group">
+              <label>Nome</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="field-group">
+              <label>Email</label>
+              <input type="email" name="email" required>
+            </div>
+            <div class="field-group">
+              <label>Messaggio</label>
+              <textarea name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Invia</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODALE DETTAGLIO -->
+  <div id="artModal" class="modal-overlay">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <div class="modal-body">
+      <img id="mImg" src="" alt="">
+      <div class="modal-info">
+        <h3 id="mTitle"></h3>
+        <span id="mTag" class="sub"></span>
+        <p id="mDesc"></p>
       </div>
     </div>
   </div>
 
   <script src="disegni.js"></script>
   <script>
-    // Navigazione a schede
-    function showSection(sectionId) {
-      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    function switchTab(tabId) {
+      document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
       
-      const targetSection = document.getElementById(sectionId);
-      targetSection.classList.add('active');
-      document.getElementById('nav-' + sectionId).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById('link-' + tabId).classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Caricamento galleria
-    const galleria = document.getElementById('galleria');
-    const modal = document.getElementById('projectModal');
-
-    mieiDisegni.forEach((disegno) => {
+    // Rendering griglia
+    const grid = document.getElementById('gridContainer');
+    mieiDisegni.forEach(item => {
       const card = document.createElement('div');
-      card.className = 'card';
+      card.className = 'art-card';
       card.innerHTML = `
-        <div class="card-img-wrapper">
-          <img src="${disegno.immagine}" alt="${disegno.titolo}" loading="lazy">
+        <div class="art-image-wrapper">
+          <img src="${item.immagine}" alt="${item.titolo}" loading="lazy">
         </div>
-        <div class="card-info">
-          <h3>${disegno.titolo}</h3>
-          <span class="tag">${disegno.tecnica}</span>
+        <div class="art-meta">
+          <span class="art-title">${item.titolo}</span>
+          <span class="art-category">${item.tecnica}</span>
         </div>
       `;
-      galleria.appendChild(card);
-      card.addEventListener('click', () => openModal(disegno));
+      card.onclick = () => openModal(item);
+      grid.appendChild(card);
     });
 
-    document.getElementById('aboutText').innerText = infoArtista.biografia;
+    if (typeof infoArtista !== 'undefined') {
+      document.getElementById('bioText').innerText = infoArtista.biografia;
+    }
 
-    // Gestione Modale
-    function openModal(progetto) {
-      document.getElementById('modalImage').src = progetto.immagine;
-      document.getElementById('modalTitle').innerText = progetto.titolo;
-      document.getElementById('modalTag').innerText = progetto.tecnica;
-      document.getElementById('modalConcept').innerText = progetto.concetto || progetto.descrizione;
-      document.getElementById('modalDetails').innerText = progetto.dettagliTecnici || "Informazioni non specificate.";
-
-      modal.classList.add('show');
+    function openModal(item) {
+      document.getElementById('mImg').src = item.immagine;
+      document.getElementById('mTitle').innerText = item.titolo;
+      document.getElementById('mTag').innerText = item.tecnica;
+      document.getElementById('mDesc').innerText = item.concetto || item.descrizione;
+      document.getElementById('artModal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-      modal.classList.remove('show');
+      document.getElementById('artModal').classList.remove('open');
       document.body.style.overflow = 'auto';
     }
-
-    document.querySelector('.close-modal').addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   </script>
 </body>
 </html>
