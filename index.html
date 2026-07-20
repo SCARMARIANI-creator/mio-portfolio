@@ -3,30 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Art by Rhien</title>
+  <title>Portfolio Artistico</title>
   
-  <!-- Font Quicksand elegante e leggero -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome 6 per le icone social -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Netlify Identity per /admin -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
     :root {
-      --font-main: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-main: 'Quicksand', sans-serif;
       --color-white: #ffffff;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--font-main);
@@ -36,12 +28,11 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* CONTENITORE HERO / HOMEPAGE SCHERMO INTERO */
+    /* HOMEPAGE SCHERMO INTERO */
     .hero-landing {
       position: relative;
       width: 100vw;
       height: 100vh;
-      /* Immagine sfondo nuvole/cielo sfumato azzurro */
       background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), 
                   url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
       display: flex;
@@ -52,10 +43,7 @@
       text-align: center;
     }
 
-    /* LOGO RIQUADRATO IN ALTO */
-    .logo-container {
-      margin-bottom: 22px;
-    }
+    .logo-container { margin-bottom: 22px; }
 
     .brand-badge {
       display: inline-block;
@@ -74,10 +62,8 @@
 
     .brand-badge:hover {
       background: rgba(255, 255, 255, 0.15);
-      border-color: #ffffff;
     }
 
-    /* NAVIGAZIONE CON SOTTOLINEATURA ANIMATA */
     nav {
       display: flex;
       gap: 32px;
@@ -98,7 +84,6 @@
       transition: color 0.3s ease;
     }
 
-    /* Sottolineatura che compare al passaggio del mouse */
     nav a::after {
       content: '';
       position: absolute;
@@ -111,19 +96,9 @@
       box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
     }
 
-    nav a:hover::after,
-    nav a.active::after {
-      width: 100%;
-    }
+    nav a:hover::after, nav a.active::after { width: 100%; }
 
-    nav a:hover {
-      color: #ffffff;
-    }
-
-    /* SEZIONE CENTRALE (TITOLO & SOTTOTITOLO) */
-    .hero-center {
-      margin: auto 0;
-    }
+    .hero-center { margin: auto 0; }
 
     .hero-title {
       font-size: clamp(3.8rem, 8.5vw, 6.8rem);
@@ -131,7 +106,6 @@
       letter-spacing: 1.5px;
       line-height: 1.05;
       margin-bottom: 20px;
-      color: var(--color-white);
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
@@ -141,10 +115,8 @@
       letter-spacing: 1px;
       margin-bottom: 25px;
       color: rgba(255, 255, 255, 0.92);
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* ICONE SOCIAL FUNZIONANTI IN BASSO */
     .social-links {
       display: flex;
       gap: 20px;
@@ -157,7 +129,6 @@
       font-size: 1.25rem;
       text-decoration: none;
       transition: transform 0.25s ease, color 0.25s ease;
-      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
     }
 
     .social-links a:hover {
@@ -165,7 +136,6 @@
       transform: translateY(-3px) scale(1.12);
     }
 
-    /* SEZIONI SECONDARIE (GALLERIA, ABOUT, COMMISSIONS) */
     .page-content {
       display: none;
       background-color: #ffffff;
@@ -174,9 +144,7 @@
       padding: 60px 40px;
     }
 
-    .page-content.active {
-      display: block;
-    }
+    .page-content.active { display: block; }
 
     .back-btn {
       background: none;
@@ -187,15 +155,8 @@
       cursor: pointer;
       margin-bottom: 30px;
       border-radius: 20px;
-      transition: all 0.2s;
     }
 
-    .back-btn:hover {
-      background: #111;
-      color: #fff;
-    }
-
-    /* MASONRY GRID */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -207,110 +168,46 @@
     .gallery-item img {
       width: 100%;
       height: auto;
-      display: block;
       border-radius: 6px;
-      transition: transform 0.4s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.02);
-    }
-
-    /* FORM COMMISSIONS */
-    .form-wrapper {
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      color: #666;
-    }
-
-    .form-group input, 
-    .form-group textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-family: var(--font-main);
-      font-size: 0.95rem;
-      outline: none;
-    }
-
-    .form-group input:focus, 
-    .form-group textarea:focus {
-      border-color: #111;
-    }
-
-    .submit-btn {
-      background: #111;
-      color: #fff;
-      border: none;
-      padding: 14px 28px;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 6px;
-      width: 100%;
     }
   </style>
 </head>
 <body>
 
-  <!-- HOMEPAGE HERO (IDENTICA A RHIENON) -->
+  <!-- HOMEPAGE -->
   <div id="homePage" class="hero-landing">
-    
-    <!-- HEADER CON LOGO E MENU -->
     <header>
       <div class="logo-container">
-        <a href="#" class="brand-badge" onclick="switchPage('homePage')">rhienon</a>
+        <a href="#" id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">Il Tuo Nome</a>
       </div>
       <nav>
         <a href="#" class="active" onclick="switchPage('homePage')">Home</a>
         <a href="#" onclick="switchPage('galleryPage')">Gallery</a>
         <a href="#" onclick="switchPage('aboutPage')">About</a>
-        <a href="#" onclick="switchPage('eventsPage')">Events</a>
         <a href="#" onclick="switchPage('commissionsPage')">Commissions</a>
-        <a href="#" onclick="switchPage('shopPage')">Shop</a>
       </nav>
     </header>
 
-    <!-- TESTO CENTRALE -->
     <div class="hero-center">
-      <h1 class="hero-title">Art by Rhien</h1>
-      <p class="hero-subtitle">Digital Artist</p>
+      <h1 class="hero-title" id="siteTitle">Il Tuo Titolo</h1>
+      <p class="hero-subtitle" id="siteSlogan">Il Tuo Slogan</p>
       
-      <!-- ICONE SOCIAL CON LINK -->
-      <div class="social-links">
-        <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="mailto:tuaemail@esempio.com" title="Email"><i class="fa-regular fa-envelope"></i></a>
-        <a href="https://mastodon.social" target="_blank" title="Mastodon"><i class="fa-brands fa-mastodon"></i></a>
-        <a href="#" title="Linktree / Bookmark"><i class="fa-regular fa-bookmark"></i></a>
+      <div class="social-links" id="socialBox">
+        <!-- I social appariranno qui automaticamente -->
       </div>
     </div>
 
-    <!-- SPAZIATORE PER CENTRATURA BILANCIATA -->
     <div></div>
   </div>
 
-  <!-- SEZIONE GALLERIA -->
+  <!-- GALLERIA -->
   <div id="galleryPage" class="page-content">
     <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     <h2 style="font-weight: 300; margin-bottom: 30px; font-size: 2rem;">Gallery</h2>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
 
-  <!-- SEZIONE ABOUT -->
+  <!-- ABOUT -->
   <div id="aboutPage" class="page-content">
     <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     <div style="max-width: 650px; margin: 0 auto;">
@@ -319,27 +216,16 @@
     </div>
   </div>
 
-  <!-- SEZIONE COMMISSIONS -->
+  <!-- COMMISSIONS -->
   <div id="commissionsPage" class="page-content">
     <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
-    <div class="form-wrapper">
-      <h2 style="font-weight: 300; margin-bottom: 10px; font-size: 2rem;">Commissions</h2>
-      <p style="color: #666; margin-bottom: 30px; font-size: 0.9rem;">Compila il modulo sottostante per richiedere un'opera o un disegno personalizzato.</p>
-      
+    <div style="max-width: 500px; margin: 0 auto;">
+      <h2 style="font-weight: 300; margin-bottom: 20px; font-size: 2rem;">Commissions</h2>
       <form action="https://formspree.io/f/moqgqgyy" method="POST">
-        <div class="form-group">
-          <label>Nome</label>
-          <input type="text" name="name" required placeholder="Il tuo nome">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" name="email" required placeholder="la-tua-email@esempio.com">
-        </div>
-        <div class="form-group">
-          <label>Messaggio</label>
-          <textarea name="message" rows="5" required placeholder="Descrivi l'idea per la commissione..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Invia Richiesta</button>
+        <input type="text" name="name" required placeholder="Il tuo nome" style="width:100%; padding:12px; margin-bottom:15px;">
+        <input type="email" name="email" required placeholder="La tua email" style="width:100%; padding:12px; margin-bottom:15px;">
+        <textarea name="message" rows="5" required placeholder="Messaggio..." style="width:100%; padding:12px; margin-bottom:15px;"></textarea>
+        <button type="submit" style="background:#111; color:#fff; padding:12px 24px; border:none; cursor:pointer;">Invia</button>
       </form>
     </div>
   </div>
@@ -353,13 +239,28 @@
       } else {
         document.getElementById('homePage').style.display = 'none';
         document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-        const target = document.getElementById(pageId);
-        if (target) target.classList.add('active');
+        document.getElementById(pageId).classList.add('active');
       }
       window.scrollTo(0, 0);
     }
 
-    // Caricamento opere da disegni.js
+    // Carica dati da infoArtista (disegni.js)
+    if (typeof infoArtista !== 'undefined') {
+      document.getElementById('siteLogo').innerText = infoArtista.nomeLogo || infoArtista.nome;
+      document.getElementById('siteTitle').innerText = infoArtista.nomeLogo || infoArtista.nome;
+      document.getElementById('siteSlogan').innerText = infoArtista.slogan || infoArtista.titolo;
+      document.getElementById('bioText').innerText = infoArtista.biografia;
+
+      // Popola Social Network
+      const socialBox = document.getElementById('socialBox');
+      socialBox.innerHTML = '';
+      if (infoArtista.instagram) socialBox.innerHTML += `<a href="${infoArtista.instagram}" target="_blank"><i class="fa-brands fa-instagram"></i></a>`;
+      if (infoArtista.email) socialBox.innerHTML += `<a href="mailto:${infoArtista.email}"><i class="fa-regular fa-envelope"></i></a>`;
+      if (infoArtista.mastodon) socialBox.innerHTML += `<a href="${infoArtista.mastodon}" target="_blank"><i class="fa-brands fa-mastodon"></i></a>`;
+      if (infoArtista.linktree) socialBox.innerHTML += `<a href="${infoArtista.linktree}" target="_blank"><i class="fa-regular fa-bookmark"></i></a>`;
+    }
+
+    // Carica Galleria
     const galleryGrid = document.getElementById('galleryGrid');
     if (typeof mieiDisegni !== 'undefined') {
       mieiDisegni.forEach(item => {
@@ -368,10 +269,6 @@
         div.innerHTML = `<img src="${item.immagine}" alt="${item.titolo}">`;
         galleryGrid.appendChild(div);
       });
-    }
-
-    if (typeof infoArtista !== 'undefined') {
-      document.getElementById('bioText').innerText = infoArtista.biografia;
     }
   </script>
 </body>
