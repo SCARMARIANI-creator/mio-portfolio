@@ -3,421 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>Art by Rhien</title>
   
-  <!-- Font Inter per uno stile editoriale e pulito -->
+  <!-- Font pulito e arrotondato tipo Quicksand / Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Icone FontAwesome per i social -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Netlify Identity Widget per il pannello /admin -->
+  <!-- Netlify Identity Widget per /admin -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --muted: #888888;
-      --border: #eeeeee;
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font: 'Quicksand', sans-serif;
+      --text-color: #ffffff;
+      --overlay-light: rgba(255, 255, 255, 0.15);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--font);
-      background-color: var(--bg);
-      color: var(--text);
+      color: var(--text-color);
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* LAYOUT A DUE COLONNE (STILE RHIENON) */
-    .site-container {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* SIDEBAR SINISTRA (FISSA) */
-    sidebar {
-      width: 280px;
-      padding: 50px 40px;
-      position: fixed;
+    /* SFONDO COPERTINA A TUTTO SCHERMO */
+    .hero-container {
+      position: relative;
+      width: 100vw;
       height: 100vh;
+      /* Puoi sostituire questo URL con l'immagine di sfondo che preferisci */
+      background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), 
+                  url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-right: 1px solid var(--border);
+      align-items: center;
+      padding: 30px 20px;
+      text-align: center;
     }
 
-    .brand-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--text);
-      display: block;
-      margin-bottom: 40px;
+    /* HEADER & NAVIGAZIONE */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      z-index: 10;
     }
 
-    .nav-links {
-      list-style: none;
-    }
-
-    .nav-links li {
-      margin-bottom: 14px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
+    /* BADGE LOGO RIQUADRATO IN ALTO */
+    .logo-badge {
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      padding: 4px 14px;
       font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      font-weight: 500;
+      backdrop-filter: blur(2px);
+    }
+
+    /* MENU DI NAVIGAZIONE */
+    nav {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
       letter-spacing: 0.5px;
-      transition: color 0.2s ease;
+      transition: all 0.3s ease;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
+    nav a:hover, nav a.active {
+      color: #ffffff;
+      transform: translateY(-1px);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
-    .sidebar-footer {
-      font-size: 0.75rem;
-      color: var(--muted);
+    /* TESTO CENTRALE HERO */
+    .hero-main {
+      margin: auto 0;
+      z-index: 10;
     }
 
-    /* CONTENUTO PRINCIPALE (A DESTRA) */
-    main {
-      margin-left: 280px;
-      flex: 1;
-      padding: 50px 60px;
+    .hero-title {
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      line-height: 1.1;
     }
 
-    .page-section {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    .hero-subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      opacity: 0.9;
     }
 
-    .page-section.active {
-      display: block;
+    /* ICONE SOCIAL IN BASSO */
+    .social-icons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .social-icons a {
+      color: #ffffff;
+      font-size: 1.2rem;
+      transition: transform 0.2s ease, opacity 0.2s;
+      opacity: 0.85;
+    }
+
+    .social-icons a:hover {
       opacity: 1;
+      transform: scale(1.15);
     }
 
-    /* GALLERIA IMMAGINI (STYLE RHIENON) */
+    /* SEZIONE CONTENUTI (GALLERIA, ABOUT, ETC) */
+    .content-section {
+      display: none;
+      background: #ffffff;
+      color: #111111;
+      min-height: 100vh;
+      padding: 80px 40px 40px 40px;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    /* MASONRY GALLERIA */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .art-card {
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .art-image-wrapper {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      overflow: hidden;
-      background-color: #f9f9f9;
-      margin-bottom: 12px;
-    }
-
-    .art-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .art-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .art-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.82rem;
-    }
-
-    .art-title { font-weight: 400; }
-    .art-category { color: var(--muted); font-weight: 300; }
-
-    /* SEZIONE ABOUT */
-    .about-content {
-      max-width: 600px;
-      margin-top: 20px;
-    }
-
-    .about-content h2 {
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin-bottom: 20px;
-    }
-
-    .about-content p {
-      font-size: 0.95rem;
-      color: #333;
-      line-height: 1.8;
-      font-weight: 300;
-      margin-bottom: 20px;
-    }
-
-    /* SEZIONE CONTATTI */
-    .contact-content {
-      max-width: 480px;
-      margin-top: 20px;
-    }
-
-    .contact-content h2 {
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin-bottom: 10px;
-    }
-
-    .contact-content p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 30px;
-    }
-
-    .field-group {
-      margin-bottom: 20px;
-    }
-
-    .field-group label {
-      display: block;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .field-group input, 
-    .field-group textarea {
-      width: 100%;
-      padding: 12px 0;
-      border: none;
-      border-bottom: 1px solid var(--border);
-      background: transparent;
-      font-family: var(--font);
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-
-    .field-group input:focus, 
-    .field-group textarea:focus {
-      border-color: var(--text);
-    }
-
-    .submit-btn {
-      background-color: var(--text);
-      color: #fff;
-      border: none;
-      padding: 14px 28px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    /* MODALE VISUALIZZAZIONE DETTAGLIO */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(255, 255, 255, 0.98);
-      z-index: 1000;
-      overflow-y: auto;
-    }
-
-    .modal-overlay.open { display: block; }
-
-    .modal-close {
-      position: fixed;
-      top: 30px; right: 40px;
-      font-size: 1.6rem;
-      cursor: pointer;
-      z-index: 1010;
-    }
-
-    .modal-body {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 0 40px;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 50px;
-    }
-
-    .modal-body img {
+    .art-item img {
       width: 100%;
       height: auto;
-    }
-
-    .modal-info h3 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 8px;
-    }
-
-    .modal-info .sub {
-      color: var(--muted);
-      font-size: 0.85rem;
       display: block;
-      margin-bottom: 30px;
+      border-radius: 4px;
+      transition: transform 0.3s;
     }
 
-    .modal-info p {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: #444;
-      font-weight: 300;
+    .art-item:hover img {
+      transform: scale(1.02);
     }
 
-    /* ADATTAMENTO MOBILE */
-    @media (max-width: 850px) {
-      .site-container { flex-direction: column; }
-      sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 30px 20px;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-      main { margin-left: 0; padding: 30px 20px; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .modal-body { grid-template-columns: 1fr; margin: 30px auto; }
+    /* FORM CONTATTI / COMMISSIONS */
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: var(--font);
+    }
+
+    .btn-submit {
+      background: #111;
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
 
-  <div class="site-container">
+  <!-- 1. HOME HERO (STILE RHIENON) -->
+  <div id="home" class="hero-container">
     
-    <!-- SIDEBAR SINISTRA -->
-    <sidebar>
-      <div>
-        <a href="#" class="brand-title" onclick="switchTab('work')">IL TUO NOME</a>
-        <ul class="nav-links">
-          <li><a href="#" id="link-work" class="active" onclick="switchTab('work')">Work</a></li>
-          <li><a href="#" id="link-about" onclick="switchTab('about')">About</a></li>
-          <li><a href="#" id="link-contact" onclick="switchTab('contact')">Contact</a></li>
-        </ul>
-      </div>
-      <div class="sidebar-footer">
-        &copy; <script>document.write(new Date().getFullYear())</script> All Rights Reserved.
-      </div>
-    </sidebar>
+    <header>
+      <div class="logo-badge">rhienon</div>
+      <nav>
+        <a href="#" class="active" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('gallery')">Gallery</a>
+        <a href="#" onclick="showPage('about')">About</a>
+        <a href="#" onclick="showPage('events')">Events</a>
+        <a href="#" onclick="showPage('commissions')">Commissions</a>
+        <a href="#" onclick="showPage('shop')">Shop</a>
+      </nav>
+    </header>
 
-    <!-- AREA CONTENUTO DESTRO -->
-    <main>
+    <div class="hero-main">
+      <h1 class="hero-title">Art by Rhien</h1>
+      <p class="hero-subtitle">Digital Artist</p>
       
-      <!-- 1. WORK SECTION -->
-      <section id="work" class="page-section active">
-        <div class="gallery-grid" id="gridContainer"></div>
-      </section>
+      <div class="social-icons">
+        <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="mailto:tuaemail@esempio.com"><i class="fa-regular fa-envelope"></i></a>
+        <a href="#"><i class="fa-brands fa-mastodon"></i></a>
+        <a href="#"><i class="fa-regular fa-bookmark"></i></a>
+      </div>
+    </div>
 
-      <!-- 2. ABOUT SECTION -->
-      <section id="about" class="page-section">
-        <div class="about-content">
-          <h2>About</h2>
-          <p id="bioText">Caricamento biografia...</p>
-        </div>
-      </section>
-
-      <!-- 3. CONTACT SECTION -->
-      <section id="contact" class="page-section">
-        <div class="contact-content">
-          <h2>Contact</h2>
-          <p>Invia un messaggio per info o richieste.</p>
-
-          <form action="https://formspree.io/f/moqgqgyy" method="POST">
-            <div class="field-group">
-              <label>Nome</label>
-              <input type="text" name="name" required>
-            </div>
-            <div class="field-group">
-              <label>Email</label>
-              <input type="email" name="email" required>
-            </div>
-            <div class="field-group">
-              <label>Messaggio</label>
-              <textarea name="message" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Invia</button>
-          </form>
-        </div>
-      </section>
-
-    </main>
+    <div><!-- Spaziatore vuoto per centratura --></div>
   </div>
 
-  <!-- MODALE DETTAGLIO -->
-  <div id="artModal" class="modal-overlay">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <div class="modal-body">
-      <img id="mImg" src="" alt="">
-      <div class="modal-info">
-        <h3 id="mTitle"></h3>
-        <span id="mTag" class="sub"></span>
-        <p id="mDesc"></p>
-      </div>
+  <!-- 2. GALLERIA -->
+  <div id="gallery" class="content-section">
+    <button onclick="showPage('home')" style="margin-bottom:20px; padding:8px 16px; cursor:pointer;">&larr; Torna alla Home</button>
+    <h2 style="margin-bottom:30px; font-weight:400;">Gallery</h2>
+    <div class="gallery-grid" id="galleryContainer"></div>
+  </div>
+
+  <!-- 3. ABOUT -->
+  <div id="about" class="content-section">
+    <button onclick="showPage('home')" style="margin-bottom:20px; padding:8px 16px; cursor:pointer;">&larr; Torna alla Home</button>
+    <h2 style="margin-bottom:20px; font-weight:400;">About</h2>
+    <p id="bioContent">Caricamento informazioni bio...</p>
+  </div>
+
+  <!-- 4. COMMISSIONS / CONTACT -->
+  <div id="commissions" class="content-section">
+    <button onclick="showPage('home')" style="margin-bottom:20px; padding:8px 16px; cursor:pointer;">&larr; Torna alla Home</button>
+    <div class="form-container">
+      <h2 style="margin-bottom:20px; font-weight:400;">Commissions</h2>
+      <form action="https://formspree.io/f/moqgqgyy" method="POST">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Il tuo nome" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="La tua email" required>
+        </div>
+        <div class="form-group">
+          <textarea name="message" rows="5" placeholder="Dettagli sulla commissione..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Invia Richiesta</button>
+      </form>
     </div>
   </div>
 
   <script src="disegni.js"></script>
   <script>
-    function switchTab(tabId) {
-      document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
-      
-      document.getElementById(tabId).classList.add('active');
-      document.getElementById('link-' + tabId).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function showPage(pageId) {
+      if (pageId === 'home') {
+        document.getElementById('home').style.display = 'flex';
+        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+      } else {
+        document.getElementById('home').style.display = 'none';
+        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+        const target = document.getElementById(pageId);
+        if (target) target.classList.add('active');
+      }
+      window.scrollTo(0, 0);
     }
 
-    // Rendering griglia
-    const grid = document.getElementById('gridContainer');
-    mieiDisegni.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'art-card';
-      card.innerHTML = `
-        <div class="art-image-wrapper">
-          <img src="${item.immagine}" alt="${item.titolo}" loading="lazy">
-        </div>
-        <div class="art-meta">
-          <span class="art-title">${item.titolo}</span>
-          <span class="art-category">${item.tecnica}</span>
-        </div>
-      `;
-      card.onclick = () => openModal(item);
-      grid.appendChild(card);
-    });
+    // Caricamento Disegni
+    const galleryContainer = document.getElementById('galleryContainer');
+    if (typeof mieiDisegni !== 'undefined') {
+      mieiDisegni.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'art-item';
+        div.innerHTML = `<img src="${item.immagine}" alt="${item.titolo}">`;
+        galleryContainer.appendChild(div);
+      });
+    }
 
     if (typeof infoArtista !== 'undefined') {
-      document.getElementById('bioText').innerText = infoArtista.biografia;
-    }
-
-    function openModal(item) {
-      document.getElementById('mImg').src = item.immagine;
-      document.getElementById('mTitle').innerText = item.titolo;
-      document.getElementById('mTag').innerText = item.tecnica;
-      document.getElementById('mDesc').innerText = item.concetto || item.descrizione;
-      document.getElementById('artModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      document.getElementById('artModal').classList.remove('open');
-      document.body.style.overflow = 'auto';
+      document.getElementById('bioContent').innerText = infoArtista.biografia;
     }
   </script>
 </body>
