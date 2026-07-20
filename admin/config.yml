@@ -1,0 +1,19 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "immagini" # Cartella dove verranno salvate le foto caricate dal pannello
+public_folder: "immagini"
+
+collections:
+  - name: "disegni"
+    label: "I Miei Disegni"
+    folder: "contenuto/disegni"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titolo Opera", name: "title", widget: "string" }
+      - { label: "Tecnica / Categoria", name: "tecnica", widget: "string" }
+      - { label: "Immagine", name: "immagine", widget: "image" }
+      - { label: "Concetto e Stile", name: "concetto", widget: "text" }
+      - { label: "Dettagli Tecnici", name: "dettagliTecnici", widget: "text", required: false }
