@@ -1,35 +1,378 @@
-backend:
-  name: git-gateway
-  branch: main
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art by Rhien</title>
+  
+  <!-- Font Quicksand elegante e leggero -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 per le icone social -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Netlify Identity per /admin -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-media_folder: "immagini"
-public_folder: "immagini"
+  <style>
+    :root {
+      --font-main: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+      --color-white: #ffffff;
+    }
 
-collections:
-  # 1. Impostazioni Generali del Sito (Slogan, Logo, Social)
-  - name: "impostazioni"
-    label: "Impostazioni Sito & Social"
-    files:
-      - file: "contenuto/info.yml"
-        label: "Info Personali e Social"
-        name: "info_personali"
-        fields:
-          - { label: "Nome Artista / Badge Logo", name: "nome_logo", widget: "string", default: "Art by Rhien" }
-          - { label: "Slogan / Sottotitolo", name: "slogan", widget: "string", default: "Digital Artist" }
-          - { label: "Link Instagram", name: "instagram", widget: "string", required: false }
-          - { label: "Email di Contatto", name: "email", widget: "string", required: false }
-          - { label: "Link Mastodon / Altro Social", name: "mastodon", widget: "string", required: false }
-          - { label: "Link Portfolio Extra / Linktree", name: "linktree", widget: "string", required: false }
-          - { label: "Biografia (Sezione About)", name: "biografia", widget: "text", required: false }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  # 2. Gestione Galleria Disegni
-  - name: "disegni"
-    label: "I Miei Disegni"
-    folder: "contenuto/disegni"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titolo Opera", name: "title", widget: "string" }
-      - { label: "Tecnica / Categoria", name: "tecnica", widget: "string" }
-      - { label: "Immagine", name: "immagine", widget: "image" }
-      - { label: "Descrizione", name: "concetto", widget: "text", required: false }
+    body {
+      font-family: var(--font-main);
+      color: var(--color-white);
+      background-color: #0d1117;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* CONTENITORE HERO / HOMEPAGE SCHERMO INTERO */
+    .hero-landing {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      /* Immagine sfondo nuvole/cielo sfumato azzurro */
+      background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), 
+                  url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 20px 50px 20px;
+      text-align: center;
+    }
+
+    /* LOGO RIQUADRATO IN ALTO */
+    .logo-container {
+      margin-bottom: 22px;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-radius: 9px;
+      padding: 3px 18px 4px 18px;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      font-weight: 500;
+      color: var(--color-white);
+      text-decoration: none;
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
+    }
+
+    .brand-badge:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #ffffff;
+    }
+
+    /* NAVIGAZIONE CON SOTTOLINEATURA ANIMATA */
+    nav {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav a {
+      position: relative;
+      color: rgba(255, 255, 255, 0.95);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      padding-bottom: 4px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      transition: color 0.3s ease;
+    }
+
+    /* Sottolineatura che compare al passaggio del mouse */
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 1.5px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--color-white);
+      transition: width 0.3s ease-in-out;
+      box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    /* SEZIONE CENTRALE (TITOLO & SOTTOTITOLO) */
+    .hero-center {
+      margin: auto 0;
+    }
+
+    .hero-title {
+      font-size: clamp(3.8rem, 8.5vw, 6.8rem);
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      color: var(--color-white);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-subtitle {
+      font-size: 1.35rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      color: rgba(255, 255, 255, 0.92);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ICONE SOCIAL FUNZIONANTI IN BASSO */
+    .social-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social-links a {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.25rem;
+      text-decoration: none;
+      transition: transform 0.25s ease, color 0.25s ease;
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
+    }
+
+    .social-links a:hover {
+      color: #ffffff;
+      transform: translateY(-3px) scale(1.12);
+    }
+
+    /* SEZIONI SECONDARIE (GALLERIA, ABOUT, COMMISSIONS) */
+    .page-content {
+      display: none;
+      background-color: #ffffff;
+      color: #111111;
+      min-height: 100vh;
+      padding: 60px 40px;
+    }
+
+    .page-content.active {
+      display: block;
+    }
+
+    .back-btn {
+      background: none;
+      border: 1px solid #ddd;
+      padding: 8px 18px;
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-bottom: 30px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    /* MASONRY GRID */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.02);
+    }
+
+    /* FORM COMMISSIONS */
+    .form-wrapper {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      color: #666;
+    }
+
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .form-group input:focus, 
+    .form-group textarea:focus {
+      border-color: #111;
+    }
+
+    .submit-btn {
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 6px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HOMEPAGE HERO (IDENTICA A RHIENON) -->
+  <div id="homePage" class="hero-landing">
+    
+    <!-- HEADER CON LOGO E MENU -->
+    <header>
+      <div class="logo-container">
+        <a href="#" class="brand-badge" onclick="switchPage('homePage')">rhienon</a>
+      </div>
+      <nav>
+        <a href="#" class="active" onclick="switchPage('homePage')">Home</a>
+        <a href="#" onclick="switchPage('galleryPage')">Gallery</a>
+        <a href="#" onclick="switchPage('aboutPage')">About</a>
+        <a href="#" onclick="switchPage('eventsPage')">Events</a>
+        <a href="#" onclick="switchPage('commissionsPage')">Commissions</a>
+        <a href="#" onclick="switchPage('shopPage')">Shop</a>
+      </nav>
+    </header>
+
+    <!-- TESTO CENTRALE -->
+    <div class="hero-center">
+      <h1 class="hero-title">Art by Rhien</h1>
+      <p class="hero-subtitle">Digital Artist</p>
+      
+      <!-- ICONE SOCIAL CON LINK -->
+      <div class="social-links">
+        <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="mailto:tuaemail@esempio.com" title="Email"><i class="fa-regular fa-envelope"></i></a>
+        <a href="https://mastodon.social" target="_blank" title="Mastodon"><i class="fa-brands fa-mastodon"></i></a>
+        <a href="#" title="Linktree / Bookmark"><i class="fa-regular fa-bookmark"></i></a>
+      </div>
+    </div>
+
+    <!-- SPAZIATORE PER CENTRATURA BILANCIATA -->
+    <div></div>
+  </div>
+
+  <!-- SEZIONE GALLERIA -->
+  <div id="galleryPage" class="page-content">
+    <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    <h2 style="font-weight: 300; margin-bottom: 30px; font-size: 2rem;">Gallery</h2>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- SEZIONE ABOUT -->
+  <div id="aboutPage" class="page-content">
+    <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    <div style="max-width: 650px; margin: 0 auto;">
+      <h2 style="font-weight: 300; margin-bottom: 20px; font-size: 2rem;">About</h2>
+      <p id="bioText" style="line-height: 1.8; color: #444; font-weight: 300;"></p>
+    </div>
+  </div>
+
+  <!-- SEZIONE COMMISSIONS -->
+  <div id="commissionsPage" class="page-content">
+    <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    <div class="form-wrapper">
+      <h2 style="font-weight: 300; margin-bottom: 10px; font-size: 2rem;">Commissions</h2>
+      <p style="color: #666; margin-bottom: 30px; font-size: 0.9rem;">Compila il modulo sottostante per richiedere un'opera o un disegno personalizzato.</p>
+      
+      <form action="https://formspree.io/f/moqgqgyy" method="POST">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" name="name" required placeholder="Il tuo nome">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="la-tua-email@esempio.com">
+        </div>
+        <div class="form-group">
+          <label>Messaggio</label>
+          <textarea name="message" rows="5" required placeholder="Descrivi l'idea per la commissione..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Invia Richiesta</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="disegni.js"></script>
+  <script>
+    function switchPage(pageId) {
+      if (pageId === 'homePage') {
+        document.getElementById('homePage').style.display = 'flex';
+        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+      } else {
+        document.getElementById('homePage').style.display = 'none';
+        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(pageId);
+        if (target) target.classList.add('active');
+      }
+      window.scrollTo(0, 0);
+    }
+
+    // Caricamento opere da disegni.js
+    const galleryGrid = document.getElementById('galleryGrid');
+    if (typeof mieiDisegni !== 'undefined') {
+      mieiDisegni.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.innerHTML = `<img src="${item.immagine}" alt="${item.titolo}">`;
+        galleryGrid.appendChild(div);
+      });
+    }
+
+    if (typeof infoArtista !== 'undefined') {
+      document.getElementById('bioText').innerText = infoArtista.biografia;
+    }
+  </script>
+</body>
+</html>
