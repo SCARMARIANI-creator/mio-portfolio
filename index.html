@@ -5,50 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DarkManga - Art by Scar</title>
   
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
   
-  <!-- CSS con forzatura cache (?v=3) -->
-  <link rel="stylesheet" href="style.css?v=3">
+  <!-- css caricato con v=4 per azzerare la cache -->
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
-  <!-- HEADER / MENU -->
-  <header class="site-header">
-    <div class="logo-badge">DarkManga</div>
-    <nav class="site-nav">
+  <!-- BARRA IN ALTO -->
+  <header class="navbar">
+    <div class="logo">DarkManga</div>
+    <nav class="nav-links">
       <a href="#">Home</a>
       <a href="#gallery">Gallery</a>
       <a href="#about">About</a>
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero-center">
-    <h1>DarkManga</h1>
-    <p class="subtitle">ART BY SCAR</p>
+  <!-- SEZIONE HERO CENTRALE -->
+  <section class="hero">
+    <h1 class="hero-title">DarkManga</h1>
+    <p class="hero-subtitle">ART BY SCAR</p>
     
-    <div class="social-badges">
-      <a href="#" target="_blank" class="social-btn">Instagram</a>
-      <a href="#" target="_blank" class="social-btn">Twitter</a>
-      <a href="#" target="_blank" class="social-btn">ArtStation</a>
+    <div class="social-row">
+      <a href="#" class="btn-social">Instagram</a>
+      <a href="#" class="btn-social">Twitter</a>
+      <a href="#" class="btn-social">ArtStation</a>
     </div>
   </section>
 
   <!-- SEZIONE GALLERIA -->
-  <section id="gallery" class="gallery-section">
-    <div id="gallery-grid" class="gallery-grid"></div>
+  <section id="gallery" class="container">
+    <div id="gallery-grid" class="grid-layout"></div>
   </section>
 
   <!-- SEZIONE ABOUT -->
-  <section id="about" class="about-section">
-    <h2>About Scar</h2>
-    <p>Benvenuti nel mio portfolio artistico DarkManga.</p>
+  <section id="about" class="container">
+    <h2 style="font-weight: 300; margin-bottom: 10px;">About Scar</h2>
+    <p style="color: #888;">Benvenuti nel mio portfolio artistico DarkManga.</p>
   </section>
 
-  <!-- CARICAMENTO SCRIPT -->
   <script src="disegni.js"></script>
   <script src="script.js"></script>
 </body>
