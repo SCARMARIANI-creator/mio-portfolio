@@ -5,43 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DarkManga - Art by Scar</title>
   
-  <!-- Font Quicksand -->
+  <!-- Font Quicksand e FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Foglio di stile CSS Separato -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HEADER / MENU -->
-  <header>
-    <div class="logo-badge">DarkManga</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#about">About</a>
-    </nav>
-  </header>
+  <!-- HOMEPAGE HERO -->
+  <div id="homePage" class="hero-landing">
+    <header>
+      <div class="logo-container">
+        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">darkmanga</a>
+      </div>
 
-  <!-- HERO SECTION (Animazione al caricamento) -->
-  <section class="hero-center">
-    <h1>DarkManga</h1>
-    <p class="subtitle">ART BY SCAR</p>
-    
-    <div class="social-badges">
-      <a href="#" target="_blank" class="social-btn">Instagram</a>
-      <a href="#" target="_blank" class="social-btn">Twitter</a>
-      <a href="#" target="_blank" class="social-btn">ArtStation</a>
+      <nav>
+        <a class="active" onclick="switchPage('homePage')">Home</a>
+        <a onclick="switchPage('galleryPage')">Gallery</a>
+        <a onclick="switchPage('aboutPage')">About</a>
+        <a onclick="switchPage('eventsPage')">Events</a>
+        <a onclick="switchPage('commissionsPage')">Commissions</a>
+        <a onclick="switchPage('shopPage')">Shop</a>
+      </nav>
+    </header>
+
+    <div class="hero-center">
+      <h1 class="hero-title" id="siteTitle">Art by Scar</h1>
+      <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
+      
+      <div class="social-links" id="socialBox">
+        <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="mailto:tuamail@esempio.com" class="social-btn" title="Email">
+          <i class="fa-regular fa-envelope"></i>
+        </a>
+        <a href="https://mastodon.social" target="_blank" class="social-btn" title="Mastodon">
+          <i class="fa-brands fa-mastodon"></i>
+        </a>
+        <a href="https://linktr.ee" target="_blank" class="social-btn" title="Linktree">
+          <i class="fa-regular fa-bookmark"></i>
+        </a>
+      </div>
     </div>
-  </section>
 
-  <!-- SEZIONE GALLERIA -->
-  <section id="gallery" class="gallery-section">
-    <div id="gallery-grid" class="gallery-grid"></div>
-  </section>
+    <div></div>
+  </div>
 
-  <!-- SCRIPT (Ordine fondamentale) -->
+  <!-- GALLERIA -->
+  <div id="galleryPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Gallery</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="aboutPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">About Scar</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div style="max-width: 680px; margin: 0 auto;">
+      <p id="bioText" style="line-height: 1.8; color: #444; font-weight: 300; font-size: 1.1rem;"></p>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div id="eventsPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Events</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="eventsGrid"></div>
+  </div>
+
+  <!-- COMMISSIONS -->
+  <div id="commissionsPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Commissions</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="form-wrapper">
+      <form action="https://formspree.io/f/moqgqgyy" method="POST">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" name="name" required placeholder="Il tuo nome">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="La tua email">
+        </div>
+        <div class="form-group">
+          <label>Messaggio</label>
+          <textarea name="message" rows="5" required placeholder="Descrivi la commissione..."></textarea>
+        </div>
+        <button type="submit" style="background:#111; color:#fff; border:none; padding:12px 24px; cursor:pointer; width:100%; border-radius:6px; font-family:var(--font-main);">Invia</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+  <div id="shopPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Shop</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="shopGrid"></div>
+  </div>
+
+  <!-- LIGHTBOX MODALE -->
+  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightboxImg" src="" alt="Zoom disegno">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
+
+  <!-- Script JS esterni caricati in ordine -->
   <script src="disegni.js"></script>
   <script src="script.js"></script>
 </body>
