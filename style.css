@@ -1,427 +1,122 @@
-:root {
-  --font-main: 'Quicksand', sans-serif;
-  --color-white: #ffffff;
-  --color-dark: #111111;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: var(--font-main);
-  color: var(--color-white);
-  background-color: #0d1117;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* 1. HEROFRAME LANDING */
-.hero-landing {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.02)), 
-              url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+  background-color: #0d0d0d;
+  color: #ffffff;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+/* HEADER & NAV */
+header {
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px 20px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 35px 20px 45px 20px;
-  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.1s;
 }
 
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.logo-container { margin-bottom: 22px; }
-
-.brand-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  border-radius: 999px;
-  padding: 3px 18px 4px 18px;
-  font-size: 0.92rem;
+.logo-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
   letter-spacing: 1px;
-  font-weight: 500;
-  color: var(--color-white);
-  text-decoration: none;
-  backdrop-filter: blur(2px);
-  transition: all 0.25s ease;
-  cursor: pointer;
-  text-transform: lowercase;
-}
-
-.brand-badge:hover { background: rgba(255, 255, 255, 0.2); }
-
-/* NAVIGAZIONE */
-nav {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  text-transform: uppercase;
 }
 
 nav a {
-  position: relative;
-  color: rgba(255, 255, 255, 0.95);
+  color: #a0a0a0;
   text-decoration: none;
-  font-size: 1.12rem;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-  padding-bottom: 3px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  transition: color 0.25s ease;
-  cursor: pointer;
+  margin-left: 20px;
+  font-size: 0.95rem;
+  transition: color 0.3s;
 }
 
-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 1.5px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--color-white);
-  transition: width 0.3s ease-in-out;
-}
-
-nav a:hover::after, nav a.active::after { width: 100%; }
-
-/* HERO CENTRALE */
-.hero-center {
-  margin: auto 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: translateY(-5px);
-}
-
-.hero-title {
-  font-size: clamp(3.8rem, 8.8vw, 7.2rem);
-  font-weight: 300;
-  letter-spacing: 1px;
-  line-height: 1.05;
-  margin-bottom: 22px;
+nav a:hover {
   color: #ffffff;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
-.hero-subtitle {
-  font-size: 1.45rem;
+/* HERO SECTION & ANIMAZIONE */
+.hero-center {
+  text-align: center;
+  margin: 100px 0 80px 0;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.hero-center h1 {
+  font-size: 3.5rem;
   font-weight: 300;
-  letter-spacing: 0.8px;
-  margin-bottom: 18px;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
 }
 
-/* ICONE SOCIAL */
-.social-links {
+.hero-center .subtitle {
+  color: #888;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  margin-bottom: 25px;
+}
+
+.social-badges {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
-  align-items: center;
 }
 
 .social-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 29px;
-  height: 29px;
-  border: 1.2px solid rgba(255, 255, 255, 0.85);
-  border-radius: 6px;
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 0.85rem;
+  color: #ccc;
   text-decoration: none;
-  backdrop-filter: blur(1px);
-  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
 .social-btn:hover {
-  background: rgba(255, 255, 255, 0.22);
-  transform: translateY(-2px);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
 }
 
-/* PAGINE INTERNE */
-.page-content {
-  display: none;
-  background-color: #ffffff;
-  color: var(--color-dark);
-  min-height: 100vh;
-  padding: 60px 40px;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.page-content.active { display: block; }
-
-.page-header {
-  max-width: 1200px;
-  margin: 0 auto 40px auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.back-btn {
-  background: none;
-  border: 1px solid #ddd;
-  padding: 8px 18px;
-  font-family: var(--font-main);
-  font-size: 0.85rem;
-  cursor: pointer;
-  border-radius: 20px;
-  transition: all 0.2s;
-}
-
-.back-btn:hover { background: #111; color: #fff; }
-
-.page-title { font-weight: 300; font-size: 2.2rem; }
-
-/* CARD GALLERIA */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card-item {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #eee;
-  background: #fafafa;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-.card-item img {
+/* SEZIONI CONTENT */
+.gallery-section, .about-section {
   width: 100%;
-  height: 280px;
-  object-fit: cover;
-  display: block;
+  max-width: 1200px;
+  padding: 60px 20px;
 }
 
-.card-body { padding: 18px; }
-.card-body h3 { font-weight: 400; margin-bottom: 6px; font-size: 1.15rem; }
-.card-body p { color: #666; font-size: 0.88rem; line-height: 1.4; }
-
-/* FORM COMMISSIONS */
-.form-wrapper { max-width: 550px; margin: 0 auto; }
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: #555; }
-.form-group input, .form-group textarea {
-  width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: var(--font-main);
-}
-
-/* LIGHTBOX */
-.lightbox-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px;
-  backdrop-filter: blur(5px);
-}
-
-.lightbox-overlay.active { display: flex; }
-
-.lightbox-overlay img {
-  max-width: 90vw;
-  max-height: 80vh;
-  border-radius: 6px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
-  object-fit: contain;
-}
-
-.lightbox-caption {
-  margin-top: 15px;
-  color: #ffffff;
-  font-size: 1.1rem;
+.about-section h2 {
   font-weight: 300;
-  letter-spacing: 0.5px;
-  text-align: center;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 25px;
-  right: 30px;
-  color: #ffffff;
-  font-size: 2.2rem;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.2s;
-}
-
-.lightbox-close:hover { opacity: 1; }
-/* ==========================================
-   LIGHTBOX / FINESTRA SOVRAPPOSTA STYLE
-   ========================================== */
-
-.lightbox-modal {
-  display: flex;
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.95); /* Sfondo scuro elegante */
-  backdrop-filter: blur(10px);
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.lightbox-modal.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Contenitore principale: affianca Immagine (Sx) e Testo (Dx) */
-.lightbox-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  max-width: 85vw;
-  max-height: 85vh;
-  gap: 35px;
-}
-
-.lightbox-img-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-height: 80vh;
-}
-
-.lightbox-img-wrapper img {
-  max-width: 100%;
-  max-height: 80vh;
-  object-fit: contain;
-  border-radius: 4px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-}
-
-/* Pannello laterale destro per titolo e descrizione */
-.lightbox-sidebar {
-  width: 300px;
-  min-width: 250px;
-  color: #ffffff;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.lightbox-sidebar h3 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 12px;
-  letter-spacing: 0.5px;
-  color: #ffffff;
-}
-
-.lightbox-sidebar p {
-  font-size: 0.95rem;
-  color: #b3b3b3;
-  font-weight: 300;
-  line-height: 1.6;
-}
-
-/* Pulsante di Chiusura (X) */
-.lightbox-close {
-  position: absolute;
-  top: 25px;
-  right: 35px;
-  color: #ffffff;
-  font-size: 32px;
-  font-weight: 300;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-  z-index: 10001;
-}
-
-.lightbox-close:hover {
-  opacity: 0.6;
-}
-
-/* Frecce di Navigazione (Avanti / Indietro) */
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 2.5rem;
-  cursor: pointer;
-  padding: 15px;
-  opacity: 0.6;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 10000;
-  user-select: none;
-}
-
-.lightbox-nav:hover {
-  opacity: 1;
-}
-
-.prev-btn {
-  left: 20px;
-}
-
-.next-btn {
-  right: 20px;
-}
-
-/* Adattamento per dispositivi mobili e schermi stretti */
-@media (max-width: 768px) {
-  .lightbox-container {
-    flex-direction: column;
-    max-height: 90vh;
-    gap: 15px;
-    overflow-y: auto;
-  }
-
-  .lightbox-sidebar {
-    width: 100%;
-    text-align: center;
-  }
-
-  .prev-btn {
-    left: 5px;
-  }
-
-  .next-btn {
-    right: 5px;
-  }
-} un effetto a cascata */
-header {
-  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  margin-bottom: 15px;
 }
