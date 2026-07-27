@@ -275,3 +275,27 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 }
 
 .lightbox-close:hover { opacity: 1; }
+/* ==========================================
+   ANIMAZIONE A COMPARSA (FADE IN + SLIDE UP)
+   ========================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px); /* Parte leggermente più in basso */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);    /* Arriva alla posizione originale */
+  }
+}
+
+/* Applichiamo l'animazione al blocco centrale (Titolo, Slogan e Social) */
+.hero-center {
+  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Applichiamo un leggerissimo ritardo al Badge Logo e alla Navigazione per un effetto a cascata */
+header {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
