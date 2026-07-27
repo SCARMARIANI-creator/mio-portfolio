@@ -11,240 +11,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <style>
-    :root {
-      --font-main: 'Quicksand', sans-serif;
-      --color-white: #ffffff;
-      --color-dark: #111111;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font-main);
-      color: var(--color-white);
-      background-color: #0d1117;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* SFONDO & LAYOUT PRINCIPALE */
-    .hero-landing {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), 
-                  url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 40px 20px 60px 20px;
-      text-align: center;
-    }
-
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-
-    /* BADGE LOGO IN ALTO (Identico all'originale) */
-    .logo-container {
-      margin-bottom: 25px;
-    }
-
-    .brand-badge {
-      display: inline-block;
-      border: 1.5px solid rgba(255, 255, 255, 0.85);
-      border-radius: 12px;
-      padding: 4px 18px;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      font-weight: 500;
-      color: var(--color-white);
-      text-decoration: none;
-      backdrop-filter: blur(2px);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .brand-badge:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* MENU NAVIGAZIONE */
-    nav {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-
-    nav a {
-      position: relative;
-      color: rgba(255, 255, 255, 0.95);
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      padding-bottom: 4px;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-      transition: color 0.3s ease;
-      cursor: pointer;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 1.5px;
-      bottom: 0;
-      left: 0;
-      background-color: var(--color-white);
-      transition: width 0.3s ease-in-out;
-    }
-
-    nav a:hover::after, nav a.active::after { 
-      width: 100%; 
-    }
-
-    /* TITOLO PRINCIPALE & DIGITAL ARTIST */
-    .hero-center {
-      margin: auto 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-title {
-      font-size: clamp(3.5rem, 8.5vw, 6.5rem);
-      font-weight: 300; /* Molto leggero e pulito */
-      letter-spacing: 1px;
-      line-height: 1.1;
-      margin-bottom: 25px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-subtitle {
-      font-size: 1.5rem;
-      font-weight: 300;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      color: rgba(255, 255, 255, 0.92);
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    /* PULSANTI SOCIAL GRAFICAMENTE IDENTICI ALL'IMMAGINE */
-    .social-links {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .social-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 32px;
-      height: 32px;
-      border: 1.5px solid rgba(255, 255, 255, 0.85);
-      border-radius: 8px; /* quadratino dai bordi arrotondati */
-      color: rgba(255, 255, 255, 0.95);
-      font-size: 0.95rem;
-      text-decoration: none;
-      backdrop-filter: blur(2px);
-      transition: all 0.25s ease;
-    }
-
-    .social-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-      color: #ffffff;
-    }
-
-    /* STRUTTURA DELLE PAGINE INTERNE */
-    .page-content {
-      display: none;
-      background-color: #ffffff;
-      color: var(--color-dark);
-      min-height: 100vh;
-      padding: 60px 40px;
-    }
-
-    .page-content.active { display: block; }
-
-    .page-header {
-      max-width: 1200px;
-      margin: 0 auto 40px auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .back-btn {
-      background: none;
-      border: 1px solid #ddd;
-      padding: 8px 18px;
-      font-family: var(--font-main);
-      font-size: 0.85rem;
-      cursor: pointer;
-      border-radius: 20px;
-      transition: all 0.2s;
-    }
-
-    .back-btn:hover { background: #111; color: #fff; }
-
-    .page-title { font-weight: 300; font-size: 2.2rem; }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .card-item {
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #eee;
-      background: #fafafa;
-    }
-
-    .card-item img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-body { padding: 20px; }
-    .card-body h3 { font-weight: 400; margin-bottom: 8px; font-size: 1.2rem; }
-    .card-body p { color: #666; font-size: 0.9rem; line-height: 1.5; }
-
-    .form-wrapper { max-width: 550px; margin: 0 auto; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: #555; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: var(--font-main);
-    }
-  </style>
+  <!-- Foglio di stile CSS Separato -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- HOMEPAGE HERO -->
   <div id="homePage" class="hero-landing">
     <header>
-      <!-- LOGO BADGE IN ALTO -->
       <div class="logo-container">
-        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">DarkManga</a>
+        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">darkmanga</a>
       </div>
 
-      <!-- MENU DI NAVIGAZIONE -->
       <nav>
         <a class="active" onclick="switchPage('homePage')">Home</a>
         <a onclick="switchPage('galleryPage')">Gallery</a>
@@ -255,12 +33,10 @@
       </nav>
     </header>
 
-    <!-- TESTO CENTRALE & ICONE SOCIAL CON BADGE ARROTONDATI -->
     <div class="hero-center">
       <h1 class="hero-title" id="siteTitle">Art by Scar</h1>
       <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
       
-      <!-- ICONE SOCIAL DENTRO I RIQUADRI ARROTONDATI -->
       <div class="social-links" id="socialBox">
         <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">
           <i class="fa-brands fa-instagram"></i>
@@ -343,43 +119,15 @@
     <div class="cards-grid" id="shopGrid"></div>
   </div>
 
+  <!-- LIGHTBOX MODALE -->
+  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightboxImg" src="" alt="Zoom disegno">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
+
+  <!-- Script JS esterni caricati in ordine -->
   <script src="disegni.js"></script>
-  <script>
-    function switchPage(pageId) {
-      if (pageId === 'homePage') {
-        document.getElementById('homePage').style.display = 'flex';
-        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-      } else {
-        document.getElementById('homePage').style.display = 'none';
-        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-        const target = document.getElementById(pageId);
-        if (target) target.classList.add('active');
-      }
-      window.scrollTo(0, 0);
-    }
-
-    if (typeof infoArtista !== 'undefined') {
-      if(infoArtista.nomeLogo) document.getElementById('siteLogo').innerText = infoArtista.nomeLogo;
-      if(infoArtista.nome) document.getElementById('siteTitle').innerText = infoArtista.nome;
-      if(infoArtista.slogan) document.getElementById('siteSlogan').innerText = infoArtista.slogan;
-      if(infoArtista.biografia) document.getElementById('bioText').innerText = infoArtista.biografia;
-    }
-
-    const galleryGrid = document.getElementById('galleryGrid');
-    if (typeof mieiDisegni !== 'undefined' && galleryGrid) {
-      mieiDisegni.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'card-item';
-        div.innerHTML = `
-          <img src="${item.immagine}" alt="${item.titolo}">
-          <div class="card-body">
-            <h3>${item.titolo}</h3>
-            <p>${item.tecnica || ''}</p>
-          </div>
-        `;
-        galleryGrid.appendChild(div);
-      });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
