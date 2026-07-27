@@ -1,58 +1,112 @@
-// Navigazione dinamica tra le sezioni del sito
-function switchPage(pageId) {
-  if (pageId === 'homePage') {
-    document.getElementById('homePage').style.display = 'flex';
-    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-  } else {
-    document.getElementById('homePage').style.display = 'none';
-    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-    const target = document.getElementById(pageId);
-    if (target) target.classList.add('active');
-  }
-  window.scrollTo(0, 0);
-}
-
-// Inserimento dati artista da disegni.js
 document.addEventListener("DOMContentLoaded", () => {
-  if (typeof infoArtista !== 'undefined') {
-    if (infoArtista.nomeLogo) document.getElementById('siteLogo').innerText = infoArtista.nomeLogo;
-    if (infoArtista.nome) document.getElementById('siteTitle').innerText = infoArtista.nome;
-    if (infoArtista.slogan) document.getElementById('siteSlogan').innerText = infoArtista.slogan;
-    if (infoArtista.biografia) document.getElementById('bioText').innerText = infoArtista.biografia;
+  const galleryGrid = document.getElementById("gallery-grid");
+
+  // Indice dell'immagine attualmente aperta nel Lightbox
+  let currentIndex = 0;
+
+  // 1. Struttura del Lightbox con frecce e pannello informazioni a destra
+  const modalHTML = `
+    <div id="lightbox-modal" class="lightbox-modal">
+      <span class="lightbox-close">&times;</span>
+      
+      <!-- Freccia Sinistra -->
+      <button class="lightbox-nav prev-btn" id="lightbox-prev">&#10094;</button>
+      
+      <div class="lightbox-container">
+        <div class="lightbox-img-wrapper">
+          <img id="lightbox-img" src="" alt="Opera ingrandita">
+        </div>
+        <div class="lightbox-sidebar">
+          <h3 id="lightbox-title"></h3>
+          <p id="lightbox-desc"></p>
+        </div>
+      </div>
+
+      <!-- Freccia Destra -->
+      <button class="lightbox-nav next-btn" id="lightbox-next">&#10095;</button>
+    </div>
+  `;
+  document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+  // Elementi del Lightbox
+  const modal = document.getElementById("lightbox-modal");
+  const modalImg = document.getElementById("lightbox-img");
+  const modalTitle = document.getElementById("lightbox-title");
+  const modalDesc = document.getElementById("lightbox-desc");
+  const closeBtn = document.querySelector(".lightbox-close");
+  const prevBtn = document.getElementById("lightbox-prev");
+  const nextBtn = document.getElementById("lightbox-next");
+
+  // Funzione per aggiornare il contenuto del Lightbox
+  function updateLightbox(index) {
+    if (typeof disegni === "undefined" || !disegni[index]) return;
+    
+    currentIndex = index;
+    const item = disegni[currentIndex];
+    
+    modalImg.src = item.immagine;
+    modalTitle.textContent = item.titolo || "Senza Titolo";
+    modalDesc.textContent = item.descrizione || "";
   }
 
-  // Popolamento dinamico della Galleria
-  const galleryGrid = document.getElementById('galleryGrid');
-  if (typeof mieiDisegni !== 'undefined' && galleryGrid) {
-    mieiDisegni.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'card-item';
-      div.onclick = () => openLightbox(item.immagine, item.titolo);
-      div.innerHTML = `
-        <img src="${item.immagine}" alt="${item.titolo}">
-        <div class="card-body">
-          <h3>${item.titolo}</h3>
-          <p>${item.tecnica || ''}</p>
+  // Funzioni di navigazione (Avanti / Indietro)
+  function showNext() {
+    const nextIndex = (currentIndex + 1) % disegni.length;
+    updateLightbox(nextIndex);
+  }
+
+  function showPrev() {
+    const prevIndex = (currentIndex - 1 + disegni.length) % disegni.length;
+    updateLightbox(prevIndex);
+  }
+
+  // 2. Popolamento Galleria
+  if (typeof disegni !== "undefined" && galleryGrid) {
+    disegni.forEach((disegno, index) => {
+      const card = document.createElement("div");
+      card.classList.add("gallery-item");
+
+      card.innerHTML = `
+        <img src="${disegno.immagine}" alt="${disegno.titolo}" loading="lazy">
+        <div class="overlay">
+          <span>${disegno.titolo}</span>
         </div>
       `;
-      galleryGrid.appendChild(div);
+
+      // Apertura Lightbox sull'immagine cliccata
+      card.addEventListener("click", () => {
+        updateLightbox(index);
+        modal.classList.add("active");
+      });
+
+      galleryGrid.appendChild(card);
     });
   }
+
+  // 3. Eventi Pulsanti
+  closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showNext();
+  });
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPrev();
+  });
+
+  // Chiusura cliccando sullo sfondo nero
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+    }
+  });
+
+  // Navigazione da tastiera (Tasti Direzionali + ESC)
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("active")) return;
+
+    if (e.key === "Escape") modal.classList.remove("active");
+    if (e.key === "ArrowRight") showNext();
+    if (e.key === "ArrowLeft") showPrev();
+  });
 });
-
-// Funzioni Lightbox per l'ingrandimento delle immagini
-function openLightbox(src, title) {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxCaption = document.getElementById('lightboxCaption');
-
-  lightboxImg.src = src;
-  lightboxCaption.innerText = title || '';
-  lightbox.classList.add('active');
-}
-
-function closeLightbox(event) {
-  if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
-    document.getElementById('lightbox').classList.remove('active');
-  }
-}
