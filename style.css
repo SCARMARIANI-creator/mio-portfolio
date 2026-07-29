@@ -275,6 +275,7 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 }
 
 .lightbox-close:hover { opacity: 1; }
+
 /* ==========================================
    ANIMAZIONE A COMPARSA (FADE IN + SLIDE UP)
    ========================================== */
@@ -298,4 +299,84 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 /* Applichiamo un leggerissimo ritardo al Badge Logo e alla Navigazione per un effetto a cascata */
 header {
   animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================
+   LIGHTBOX / FINESTRA SOVRAPPOSTA
+   ========================================== */
+
+.lightbox-modal {
+  display: flex;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* Sfondo scuro semi-trasparente */
+  backdrop-filter: blur(8px); /* Effetto sfocato sullo sfondo */
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Quando il lightbox è attivo */
+.lightbox-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.lightbox-info {
+  margin-top: 15px;
+  color: #ffffff;
+}
+
+.lightbox-info h3 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+.lightbox-info p {
+  font-size: 0.95rem;
+  color: #cccccc;
+  font-weight: 300;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+/* Pulsante di chiusura (X) */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #ffffff;
+  font-size: 35px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 0.6;
 }
