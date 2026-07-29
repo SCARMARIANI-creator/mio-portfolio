@@ -6,6 +6,13 @@ const mieiDisegni = [
     concetto: "Un'interpretazione personale che unisce lo stile manga con elementi iperrealistici e sfumature horror, focalizzata sull'espressività e sul contrasto netto.",
     dettagliTecnici: "Realizzato interamente a mano libera utilizzando diverse tipologie di penne a sfera (biro) per dosare la pressione e creare sfumature graduali di nero e grigio."
   }
+  {
+    titolo: "Ritratto a Matita Collab",
+    tecnica: "Penna su Carta",
+    immagine: "immagini/immagine2.jpg",
+    concetto: "Un'interpretazione personale che unisce lo stile manga con elementi iperrealistici e sfumature horror, focalizzata sull'espressività e sul contrasto netto.",
+    dettagliTecnici: "Realizzato interamente a mano libera utilizzando diverse tipologie di penne a sfera (biro) per dosare la pressione e creare sfumature graduali di nero e grigio."
+  }
   /* 
   Esempio per aggiungere un secondo lavoro:
   ,{
