@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Artistico</title>
+  <title>DarkManga - Portfolio</title>
   
   <!-- Font Quicksand e FontAwesome per icone -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,7 +138,7 @@
       transform: translateY(-3px) scale(1.12);
     }
 
-    /* SEZIONI SECONDARIE (WHITE CONTAINER) */
+    /* SEZIONI SECONDARIE */
     .page-content {
       display: none;
       background-color: #ffffff;
@@ -172,7 +172,6 @@
 
     .page-title { font-weight: 300; font-size: 2.2rem; }
 
-    /* MASONRY / GRID LAYOUTS */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -217,7 +216,6 @@
       letter-spacing: 1px;
     }
 
-    /* FORM STYLES */
     .form-wrapper { max-width: 550px; margin: 0 auto; }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: #555; }
@@ -232,7 +230,7 @@
   <div id="homePage" class="hero-landing">
     <header>
       <div class="logo-container">
-        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">rhienon</a>
+        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">darkmanga</a>
       </div>
       <nav>
         <a class="active" onclick="switchPage('homePage')">Home</a>
@@ -245,18 +243,18 @@
     </header>
 
     <div class="hero-center">
-      <h1 class="hero-title" id="siteTitle">Art by Rhien</h1>
-      <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
+      <h1 class="hero-title" id="siteTitle">Art by DarkManga</h1>
+      <p class="hero-subtitle" id="siteSlogan">Manga Artist & Illustrator | Signed by Scar</p>
       
       <div class="social-links" id="socialBox">
-        <!-- Social popolati da JS -->
+        <!-- Social popolati da JS o predefiniti -->
       </div>
     </div>
 
     <div></div>
   </div>
 
-  <!-- 1. PAGINA GALLERY -->
+  <!-- GALLERIA -->
   <div id="galleryPage" class="page-content">
     <div class="page-header">
       <h2 class="page-title">Gallery</h2>
@@ -265,10 +263,10 @@
     <div class="cards-grid" id="galleryGrid"></div>
   </div>
 
-  <!-- 2. PAGINA ABOUT -->
+  <!-- ABOUT -->
   <div id="aboutPage" class="page-content">
     <div class="page-header">
-      <h2 class="page-title">About</h2>
+      <h2 class="page-title">About Scar</h2>
       <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     </div>
     <div style="max-width: 680px; margin: 0 auto;">
@@ -276,7 +274,7 @@
     </div>
   </div>
 
-  <!-- 3. PAGINA EVENTS -->
+  <!-- EVENTS -->
   <div id="eventsPage" class="page-content">
     <div class="page-header">
       <h2 class="page-title">Events & Exhibitions</h2>
@@ -285,14 +283,14 @@
     <div class="cards-grid" id="eventsGrid"></div>
   </div>
 
-  <!-- 4. PAGINA COMMISSIONS -->
+  <!-- COMMISSIONS -->
   <div id="commissionsPage" class="page-content">
     <div class="page-header">
       <h2 class="page-title">Commissions</h2>
       <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     </div>
     <div class="form-wrapper">
-      <p style="color: #666; margin-bottom: 25px;">Compila il modulo sottostante per richiedere una commissione personalizzata.</p>
+      <p style="color: #666; margin-bottom: 25px;">Richiedi un'illustrazione o tavola manga firmata Scar.</p>
       <form action="https://formspree.io/f/moqgqgyy" method="POST">
         <div class="form-group">
           <label>Nome</label>
@@ -304,14 +302,14 @@
         </div>
         <div class="form-group">
           <label>Dettagli della commissione</label>
-          <textarea name="message" rows="5" required placeholder="Descrivi il soggetto, stile e scadenze..."></textarea>
+          <textarea name="message" rows="5" required placeholder="Descrivi l'idea, lo stile e la scadenza..."></textarea>
         </div>
         <button type="submit" class="btn-action" style="width: 100%; border: none; cursor: pointer; padding: 14px;">Invia Richiesta</button>
       </form>
     </div>
   </div>
 
-  <!-- 5. PAGINA SHOP -->
+  <!-- SHOP -->
   <div id="shopPage" class="page-content">
     <div class="page-header">
       <h2 class="page-title">Shop & Prints</h2>
@@ -320,10 +318,8 @@
     <div class="cards-grid" id="shopGrid"></div>
   </div>
 
-  <!-- JAVASCRIPT DI GESTIONE -->
   <script src="disegni.js"></script>
   <script>
-    // Navigazione dinamica tra le sezioni
     function switchPage(pageId) {
       if (pageId === 'homePage') {
         document.getElementById('homePage').style.display = 'flex';
@@ -337,11 +333,10 @@
       window.scrollTo(0, 0);
     }
 
-    // Caricamento Informazioni Generali dell'Artista
     if (typeof infoArtista !== 'undefined') {
-      document.getElementById('siteLogo').innerText = infoArtista.nomeLogo || infoArtista.nome;
-      document.getElementById('siteTitle').innerText = infoArtista.nomeLogo || infoArtista.nome;
-      document.getElementById('siteSlogan').innerText = infoArtista.slogan || infoArtista.titolo;
+      document.getElementById('siteLogo').innerText = infoArtista.nomeLogo || "darkmanga";
+      document.getElementById('siteTitle').innerText = infoArtista.nome || "Art by DarkManga";
+      document.getElementById('siteSlogan').innerText = infoArtista.slogan || "Manga Artist & Illustrator | Signed by Scar";
       document.getElementById('bioText').innerText = infoArtista.biografia;
 
       const socialBox = document.getElementById('socialBox');
@@ -366,42 +361,6 @@
           </div>
         `;
         galleryGrid.appendChild(div);
-      });
-    }
-
-    // Popolamento Eventi
-    const eventsGrid = document.getElementById('eventsGrid');
-    if (typeof mieiEventi !== 'undefined' && eventsGrid) {
-      mieiEventi.forEach(ev => {
-        const div = document.createElement('div');
-        div.className = 'card-item';
-        div.innerHTML = `
-          <div class="card-body">
-            <h3>${ev.titolo}</h3>
-            <p><strong>Data:</strong> ${ev.data}<br><strong>Luogo:</strong> ${ev.luogo}</p>
-            <p>${ev.descrizione || ''}</p>
-            ${ev.link ? `<a href="${ev.link}" target="_blank" class="btn-action">Maggiori Info</a>` : ''}
-          </div>
-        `;
-        eventsGrid.appendChild(div);
-      });
-    }
-
-    // Popolamento Shop
-    const shopGrid = document.getElementById('shopGrid');
-    if (typeof mieiProdotti !== 'undefined' && shopGrid) {
-      mieiProdotti.forEach(prod => {
-        const div = document.createElement('div');
-        div.className = 'card-item';
-        div.innerHTML = `
-          <img src="${prod.immagine}" alt="${prod.titolo}">
-          <div class="card-body">
-            <h3>${prod.titolo}</h3>
-            <p><strong>${prod.prezzo}</strong></p>
-            <a href="${prod.link}" target="_blank" class="btn-action">Acquista Ora</a>
-          </div>
-        `;
-        shopGrid.appendChild(div);
       });
     }
   </script>
