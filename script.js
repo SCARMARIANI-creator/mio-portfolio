@@ -1,65 +1,58 @@
+// Navigazione dinamica tra le sezioni del sito
+function switchPage(pageId) {
+  if (pageId === 'homePage') {
+    document.getElementById('homePage').style.display = 'flex';
+    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+  } else {
+    document.getElementById('homePage').style.display = 'none';
+    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(pageId);
+    if (target) target.classList.add('active');
+  }
+  window.scrollTo(0, 0);
+}
+
+// Inserimento dati artista da disegni.js
 document.addEventListener("DOMContentLoaded", () => {
-  const galleryGrid = document.getElementById("gallery-grid");
-
-  // 1. Creiamo dinamicamente la finestra sovrapposta (Lightbox) nel DOM
-  const modalHTML = `
-    <div id="lightbox-modal" class="lightbox-modal">
-      <span class="lightbox-close">&times;</span>
-      <div class="lightbox-content">
-        <img id="lightbox-img" src="" alt="Opera ingrandita">
-        <div class="lightbox-info">
-          <h3 id="lightbox-title"></h3>
-          <p id="lightbox-desc"></p>
-        </div>
-      </div>
-    </div>
-  `;
-  document.body.insertAdjacentHTML("beforeend", modalHTML);
-
-  // Elementi del Lightbox
-  const modal = document.getElementById("lightbox-modal");
-  const modalImg = document.getElementById("lightbox-img");
-  const modalTitle = document.getElementById("lightbox-title");
-  const modalDesc = document.getElementById("lightbox-desc");
-  const closeBtn = document.querySelector(".lightbox-close");
-
-  // 2. Popoliamo la Galleria leggendo i dati da disegni.js
-  if (typeof disegni !== "undefined" && galleryGrid) {
-    disegni.forEach((disegno) => {
-      const card = document.createElement("div");
-      card.classList.add("gallery-item");
-
-      card.innerHTML = `
-        <img src="${disegno.immagine}" alt="${disegno.titolo}" loading="lazy">
-        <div class="overlay">
-          <span>${disegno.titolo}</span>
-        </div>
-      `;
-
-      // Evento Click: Apre la finestra sovrapposta con i dati del disegno
-      card.addEventListener("click", () => {
-        modalImg.src = disegno.immagine;
-        modalTitle.textContent = disegno.titolo;
-        modalDesc.textContent = disegno.descrizione || ""; // Se non c'è descrizione, lascia vuoto
-        modal.classList.add("active");
-      });
-
-      galleryGrid.appendChild(card);
-    });
+  if (typeof infoArtista !== 'undefined') {
+    if (infoArtista.nomeLogo) document.getElementById('siteLogo').innerText = infoArtista.nomeLogo;
+    if (infoArtista.nome) document.getElementById('siteTitle').innerText = infoArtista.nome;
+    if (infoArtista.slogan) document.getElementById('siteSlogan').innerText = infoArtista.slogan;
+    if (infoArtista.biografia) document.getElementById('bioText').innerText = infoArtista.biografia;
   }
 
-  // 3. Chiusura del Lightbox (clic sulla X o sullo sfondo scuro)
-  closeBtn.addEventListener("click", () => modal.classList.remove("active"));
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("active");
-    }
-  });
-
-  // Chiusura premendo il tasto ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      modal.classList.remove("active");
-    }
-  });
+  // Popolamento dinamico della Galleria
+  const galleryGrid = document.getElementById('galleryGrid');
+  if (typeof mieiDisegni !== 'undefined' && galleryGrid) {
+    mieiDisegni.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.onclick = () => openLightbox(item.immagine, item.titolo);
+      div.innerHTML = `
+        <img src="${item.immagine}" alt="${item.titolo}">
+        <div class="card-body">
+          <h3>${item.titolo}</h3>
+          <p>${item.tecnica || ''}</p>
+        </div>
+      `;
+      galleryGrid.appendChild(div);
+    });
+  }
 });
+
+// Funzioni Lightbox per l'ingrandimento delle immagini
+function openLightbox(src, title) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+
+  lightboxImg.src = src;
+  lightboxCaption.innerText = title || '';
+  lightbox.classList.add('active');
+}
+
+function closeLightbox(event) {
+  if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+}
