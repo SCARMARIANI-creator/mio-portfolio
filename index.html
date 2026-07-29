@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DarkManga - Portfolio</title>
+  <title>DarkManga - Art by Scar</title>
   
-  <!-- Font Quicksand e FontAwesome per icone -->
+  <!-- Font Quicksand e FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
     :root {
@@ -28,43 +26,54 @@
       background-color: #0d1117;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* 1. HOMEPAGE LANDING HERO */
+    /* 1. HEROFRAME LANDING */
     .hero-landing {
       position: relative;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), 
+      background: linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.02)), 
                   url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      padding: 40px 20px 50px 20px;
+      padding: 35px 20px 45px 20px;
       text-align: center;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     .logo-container { margin-bottom: 22px; }
 
     .brand-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border: 1.5px solid rgba(255, 255, 255, 0.85);
-      border-radius: 9px;
+      border-radius: 999px;
       padding: 3px 18px 4px 18px;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-      text-transform: lowercase;
+      font-size: 0.92rem;
+      letter-spacing: 1px;
       font-weight: 500;
       color: var(--color-white);
       text-decoration: none;
       backdrop-filter: blur(2px);
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      text-transform: lowercase;
     }
 
-    .brand-badge:hover { background: rgba(255, 255, 255, 0.15); }
+    .brand-badge:hover { background: rgba(255, 255, 255, 0.2); }
 
-    /* MENU CON SOTTOLINEATURA HOVER */
+    /* MENU */
     nav {
       display: flex;
       gap: 32px;
@@ -77,12 +86,12 @@
       position: relative;
       color: rgba(255, 255, 255, 0.95);
       text-decoration: none;
-      font-size: 1.05rem;
+      font-size: 1.12rem;
       font-weight: 400;
-      letter-spacing: 0.5px;
-      padding-bottom: 4px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-      transition: color 0.3s ease;
+      letter-spacing: 0.3px;
+      padding-bottom: 3px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      transition: color 0.25s ease;
       cursor: pointer;
     }
 
@@ -95,50 +104,68 @@
       left: 0;
       background-color: var(--color-white);
       transition: width 0.3s ease-in-out;
-      box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
     }
 
     nav a:hover::after, nav a.active::after { width: 100%; }
 
-    .hero-center { margin: auto 0; }
+    /* HERO CENTRALE */
+    .hero-center {
+      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: translateY(-5px);
+    }
 
     .hero-title {
-      font-size: clamp(3.8rem, 8.5vw, 6.8rem);
+      font-size: clamp(3.8rem, 8.8vw, 7.2rem);
       font-weight: 300;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       line-height: 1.05;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 22px;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
     }
 
     .hero-subtitle {
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       font-weight: 300;
-      letter-spacing: 1px;
-      margin-bottom: 25px;
-      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: 0.8px;
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     }
 
+    /* ICONE SOCIAL */
     .social-links {
       display: flex;
-      gap: 20px;
+      gap: 10px;
       justify-content: center;
       align-items: center;
     }
 
-    .social-links a {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.25rem;
+    .social-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 29px;
+      height: 29px;
+      border: 1.2px solid rgba(255, 255, 255, 0.85);
+      border-radius: 6px;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.85rem;
       text-decoration: none;
-      transition: transform 0.25s ease, color 0.25s ease;
+      backdrop-filter: blur(1px);
+      transition: all 0.25s ease;
     }
 
-    .social-links a:hover {
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
       color: #ffffff;
-      transform: translateY(-3px) scale(1.12);
     }
 
-    /* SEZIONI SECONDARIE */
+    /* PAGINE INTERNE */
     .page-content {
       display: none;
       background-color: #ffffff;
@@ -172,6 +199,7 @@
 
     .page-title { font-weight: 300; font-size: 2.2rem; }
 
+    /* CARD GALLERIA */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -185,43 +213,82 @@
       overflow: hidden;
       border: 1px solid #eee;
       background: #fafafa;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .card-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
     .card-item img {
       width: 100%;
-      height: 250px;
+      height: 280px;
       object-fit: cover;
       display: block;
     }
 
-    .card-body { padding: 20px; }
-    .card-body h3 { font-weight: 400; margin-bottom: 8px; font-size: 1.2rem; }
-    .card-body p { color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; }
+    .card-body { padding: 18px; }
+    .card-body h3 { font-weight: 400; margin-bottom: 6px; font-size: 1.15rem; }
+    .card-body p { color: #666; font-size: 0.88rem; line-height: 1.4; }
 
-    .btn-action {
-      display: inline-block;
-      padding: 8px 16px;
-      background: #111;
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.8rem;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
+    /* FORM COMMISSIONS */
     .form-wrapper { max-width: 550px; margin: 0 auto; }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: #555; }
     .form-group input, .form-group textarea {
       width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-family: var(--font-main);
     }
+
+    /* LIGHTBOX PER APERTURA IMMAGINI A TUTTO SCHERMO */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox-overlay.active { display: flex; }
+
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 6px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-caption {
+      margin-top: 15px;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      color: #ffffff;
+      font-size: 2.2rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
   </style>
 </head>
 <body>
@@ -232,6 +299,7 @@
       <div class="logo-container">
         <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">darkmanga</a>
       </div>
+
       <nav>
         <a class="active" onclick="switchPage('homePage')">Home</a>
         <a onclick="switchPage('galleryPage')">Gallery</a>
@@ -243,11 +311,22 @@
     </header>
 
     <div class="hero-center">
-      <h1 class="hero-title" id="siteTitle">Art by DarkManga</h1>
-      <p class="hero-subtitle" id="siteSlogan">Manga Artist & Illustrator | Signed by Scar</p>
+      <h1 class="hero-title" id="siteTitle">Art by Scar</h1>
+      <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
       
       <div class="social-links" id="socialBox">
-        <!-- Social popolati da JS o predefiniti -->
+        <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="mailto:tuamail@esempio.com" class="social-btn" title="Email">
+          <i class="fa-regular fa-envelope"></i>
+        </a>
+        <a href="https://mastodon.social" target="_blank" class="social-btn" title="Mastodon">
+          <i class="fa-brands fa-mastodon"></i>
+        </a>
+        <a href="https://linktr.ee" target="_blank" class="social-btn" title="Linktree">
+          <i class="fa-regular fa-bookmark"></i>
+        </a>
       </div>
     </div>
 
@@ -277,7 +356,7 @@
   <!-- EVENTS -->
   <div id="eventsPage" class="page-content">
     <div class="page-header">
-      <h2 class="page-title">Events & Exhibitions</h2>
+      <h2 class="page-title">Events</h2>
       <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     </div>
     <div class="cards-grid" id="eventsGrid"></div>
@@ -290,7 +369,6 @@
       <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     </div>
     <div class="form-wrapper">
-      <p style="color: #666; margin-bottom: 25px;">Richiedi un'illustrazione o tavola manga firmata Scar.</p>
       <form action="https://formspree.io/f/moqgqgyy" method="POST">
         <div class="form-group">
           <label>Nome</label>
@@ -301,10 +379,10 @@
           <input type="email" name="email" required placeholder="La tua email">
         </div>
         <div class="form-group">
-          <label>Dettagli della commissione</label>
-          <textarea name="message" rows="5" required placeholder="Descrivi l'idea, lo stile e la scadenza..."></textarea>
+          <label>Messaggio</label>
+          <textarea name="message" rows="5" required placeholder="Descrivi la commissione..."></textarea>
         </div>
-        <button type="submit" class="btn-action" style="width: 100%; border: none; cursor: pointer; padding: 14px;">Invia Richiesta</button>
+        <button type="submit" style="background:#111; color:#fff; border:none; padding:12px 24px; cursor:pointer; width:100%; border-radius:6px; font-family:var(--font-main);">Invia</button>
       </form>
     </div>
   </div>
@@ -312,14 +390,22 @@
   <!-- SHOP -->
   <div id="shopPage" class="page-content">
     <div class="page-header">
-      <h2 class="page-title">Shop & Prints</h2>
+      <h2 class="page-title">Shop</h2>
       <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
     </div>
     <div class="cards-grid" id="shopGrid"></div>
   </div>
 
+  <!-- MODALE LIGHTBOX PER INGRANDIRE L'IMMAGINE -->
+  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightboxImg" src="" alt="Zoom disegno">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
+
   <script src="disegni.js"></script>
   <script>
+    // Navigazione tra le pagine
     function switchPage(pageId) {
       if (pageId === 'homePage') {
         document.getElementById('homePage').style.display = 'flex';
@@ -333,26 +419,21 @@
       window.scrollTo(0, 0);
     }
 
+    // Dati Artista
     if (typeof infoArtista !== 'undefined') {
-      document.getElementById('siteLogo').innerText = infoArtista.nomeLogo || "darkmanga";
-      document.getElementById('siteTitle').innerText = infoArtista.nome || "Art by DarkManga";
-      document.getElementById('siteSlogan').innerText = infoArtista.slogan || "Manga Artist & Illustrator | Signed by Scar";
-      document.getElementById('bioText').innerText = infoArtista.biografia;
-
-      const socialBox = document.getElementById('socialBox');
-      socialBox.innerHTML = '';
-      if (infoArtista.instagram) socialBox.innerHTML += `<a href="${infoArtista.instagram}" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>`;
-      if (infoArtista.email) socialBox.innerHTML += `<a href="mailto:${infoArtista.email}" title="Email"><i class="fa-regular fa-envelope"></i></a>`;
-      if (infoArtista.mastodon) socialBox.innerHTML += `<a href="${infoArtista.mastodon}" target="_blank" title="Mastodon"><i class="fa-brands fa-mastodon"></i></a>`;
-      if (infoArtista.linktree) socialBox.innerHTML += `<a href="${infoArtista.linktree}" target="_blank" title="Linktree"><i class="fa-regular fa-bookmark"></i></a>`;
+      if(infoArtista.nomeLogo) document.getElementById('siteLogo').innerText = infoArtista.nomeLogo;
+      if(infoArtista.nome) document.getElementById('siteTitle').innerText = infoArtista.nome;
+      if(infoArtista.slogan) document.getElementById('siteSlogan').innerText = infoArtista.slogan;
+      if(infoArtista.biografia) document.getElementById('bioText').innerText = infoArtista.biografia;
     }
 
-    // Popolamento Galleria
+    // Caricamento Galleria e gestione Clic Immagine
     const galleryGrid = document.getElementById('galleryGrid');
     if (typeof mieiDisegni !== 'undefined' && galleryGrid) {
       mieiDisegni.forEach(item => {
         const div = document.createElement('div');
         div.className = 'card-item';
+        div.onclick = () => openLightbox(item.immagine, item.titolo);
         div.innerHTML = `
           <img src="${item.immagine}" alt="${item.titolo}">
           <div class="card-body">
@@ -362,6 +443,24 @@
         `;
         galleryGrid.appendChild(div);
       });
+    }
+
+    // Funzioni per la modale Lightbox
+    function openLightbox(src, title) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+
+      lightboxImg.src = src;
+      lightboxCaption.innerText = title || '';
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox(event) {
+      // Chiude se si clicca sullo sfondo trasparente o sul pulsante X
+      if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('active');
+      }
     }
   </script>
 </body>
