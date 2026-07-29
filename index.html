@@ -1,120 +1,120 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DarkManga - Art by Scar</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkManga - Art by Scar</title>
 
-  <!-- Font e Icone -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Font e Icone -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Foglio di stile esterno -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Foglio di stile esterno -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HOMEPAGE HERO -->
-  <div id="homePage" class="hero-landing">
-    <header>
-      <div class="logo-container">
-        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">darkmanga</a>
-      </div>
+  <!-- HOMEPAGE HERO -->
+  <div id="homePage" class="hero-landing">
+    <header>
+      <div class="logo-container">
+        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">darkmanga</a>
+      </div>
 
-      <nav>
-        <a class="active" onclick="switchPage('homePage')">Home</a>
-        <a onclick="switchPage('galleryPage')">Gallery</a>
-        <a onclick="switchPage('aboutPage')">About</a>
-        <a onclick="switchPage('eventsPage')">Events</a>
-        <a onclick="switchPage('commissionsPage')">Commissions</a>
-        <a onclick="switchPage('shopPage')">Shop</a>
-      </nav>
-    </header>
+      <nav>
+        <a class="active" onclick="switchPage('homePage')">Home</a>
+        <a onclick="switchPage('galleryPage')">Gallery</a>
+        <a onclick="switchPage('aboutPage')">About</a>
+        <a onclick="switchPage('eventsPage')">Events</a>
+        <a onclick="switchPage('commissionsPage')">Commissions</a>
+        <a onclick="switchPage('shopPage')">Shop</a>
+      </nav>
+    </header>
 
- <div class="hero-center">
-      <h1 class="hero-title" id="siteTitle">Art by Scar</h1>
-      <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
-      
-      <div class="social-links" id="socialBox"></div>
-    </div>
+    <div class="hero-center">
+      <h1 class="hero-title" id="siteTitle">Art by Scar</h1>
+      <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
+      
+      <div class="social-links" id="socialBox"></div>
+    </div>
 
-    <div></div>
-  </div>
+    <div></div>
+  </div>
 
-  <!-- GALLERIA -->
-  <div id="galleryPage" class="page-content">
-    <div class="page-header">
-      <h2 class="page-title">Gallery</h2>
-      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
-    </div>
-    <div class="cards-grid" id="galleryGrid"></div>
-  </div>
+  <!-- GALLERIA -->
+  <div id="galleryPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Gallery</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="galleryGrid"></div>
+  </div>
 
-  <!-- ABOUT -->
-  <div id="aboutPage" class="page-content">
-    <div class="page-header">
-      <h2 class="page-title">About Scar</h2>
-      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
-    </div>
-    <div class="about-container">
-      <p id="bioText"></p>
-    </div>
-  </div>
+  <!-- ABOUT -->
+  <div id="aboutPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">About Scar</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="about-container">
+      <p id="bioText"></p>
+    </div>
+  </div>
 
-  <!-- EVENTS -->
-  <div id="eventsPage" class="page-content">
-    <div class="page-header">
-      <h2 class="page-title">Events</h2>
-      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
-    </div>
-    <div class="cards-grid" id="eventsGrid"></div>
-  </div>
+  <!-- EVENTS -->
+  <div id="eventsPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Events</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="eventsGrid"></div>
+  </div>
 
-  <!-- COMMISSIONS -->
-  <div id="commissionsPage" class="page-content">
-    <div class="page-header">
-      <h2 class="page-title">Commissions</h2>
-      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
-    </div>
-    <div class="form-wrapper">
-      <form action="https://formspree.io/f/moqgqgyy" method="POST">
-        <div class="form-group">
-          <label>Nome</label>
-          <input type="text" name="name" required placeholder="Il tuo nome">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" name="email" required placeholder="La tua email">
-        </div>
-        <div class="form-group">
-          <label>Messaggio</label>
-          <textarea name="message" rows="5" required placeholder="Descrivi la commissione..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Invia</button>
-      </form>
-    </div>
-  </div>
+  <!-- COMMISSIONS -->
+  <div id="commissionsPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Commissions</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="form-wrapper">
+      <form action="https://formspree.io/f/moqgqgyy" method="POST">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" name="name" required placeholder="Il tuo nome">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="La tua email">
+        </div>
+        <div class="form-group">
+          <label>Messaggio</label>
+          <textarea name="message" rows="5" required placeholder="Descrivi la commissione..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Invia</button>
+      </form>
+    </div>
+  </div>
 
-  <!-- SHOP -->
-  <div id="shopPage" class="page-content">
-    <div class="page-header">
-      <h2 class="page-title">Shop</h2>
-      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
-    </div>
-    <div class="cards-grid" id="shopGrid"></div>
-  </div>
+  <!-- SHOP -->
+  <div id="shopPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Shop</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="shopGrid"></div>
+  </div>
 
-  <!-- LIGHTBOX (MODALE INGRANDIMENTO IMMAGINE) -->
-  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
-    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
-    <img id="lightboxImg" src="" alt="Zoom disegno">
-    <div id="lightboxCaption" class="lightbox-caption"></div>
-  </div>
+  <!-- LIGHTBOX (MODALE INGRANDIMENTO IMMAGINE) -->
+  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightboxImg" src="" alt="Zoom disegno">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
 
 <!-- IMPORTANTE: carica PRIMA i dati di disegni.js, POI la logica di script.js -->
-  <script src="disegni.js"></script>
-  <script src="script.js"></script>
+  <script src="disegni.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
