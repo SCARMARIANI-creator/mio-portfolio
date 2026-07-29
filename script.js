@@ -31,12 +31,12 @@ function closeLightbox(event) {
 }
 
 function inizializzaSito() {
-  // Carica Info Artista
+  // 1. CARICA INFO ARTISTA E SOCIAL
   if (typeof infoArtista !== 'undefined') {
-    if (document.getElementById('siteLogo')) document.getElementById('siteLogo').innerText = infoArtista.nomeLogo || infoArtista.nome;
-    if (document.getElementById('siteTitle')) document.getElementById('siteTitle').innerText = infoArtista.nome;
-    if (document.getElementById('siteSlogan')) document.getElementById('siteSlogan').innerText = infoArtista.slogan;
-    if (document.getElementById('bioText')) document.getElementById('bioText').innerText = infoArtista.biografia;
+    if (document.getElementById('siteLogo')) document.getElementById('siteLogo').innerText = infoArtista.nomeLogo || "darkmanga";
+    if (document.getElementById('siteTitle')) document.getElementById('siteTitle').innerText = infoArtista.nome || "Art by Scar";
+    if (document.getElementById('siteSlogan')) document.getElementById('siteSlogan').innerText = infoArtista.slogan || "L'immaginazione è fatta d'inchiostro";
+    if (document.getElementById('bioText')) document.getElementById('bioText').innerText = infoArtista.biografia || "";
 
     const socialBox = document.getElementById('socialBox');
     if (socialBox) {
@@ -48,7 +48,7 @@ function inizializzaSito() {
     }
   }
 
-  // Carica Galleria
+  // 2. CARICA GALLERIA IMMAGINI
   const galleryGrid = document.getElementById('galleryGrid');
   if (typeof mieiDisegni !== 'undefined' && Array.isArray(mieiDisegni) && galleryGrid) {
     galleryGrid.innerHTML = '';
@@ -68,7 +68,7 @@ function inizializzaSito() {
   }
 }
 
-// Esegue l'inizializzazione appena la pagina è pronta
+// Avvio automatico quando la pagina carica
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', inizializzaSito);
 } else {
