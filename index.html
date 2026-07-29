@@ -1,439 +1,120 @@
-/* ================================
-   ART BY SCAR - DARK MANGA STYLE
-   Main stylesheet
-================================ */
-
-:root {
-    --bg: #050505;
-    --bg-soft: #101010;
-    --white: #f5f5f5;
-    --gray: #999;
-    --border: rgba(255,255,255,0.15);
-    --shadow: 0 20px 60px rgba(0,0,0,.8);
-    --transition: .5s cubic-bezier(.2,.8,.2,1);
-}
-
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html {
-    scroll-behavior:smooth;
-}
-
-body {
-    background:var(--bg);
-    color:var(--white);
-    font-family:"Inter", Arial, sans-serif;
-    overflow-x:hidden;
-}
-
-
-/* ================================
-   BACKGROUND EFFECT
-================================ */
-
-body::before {
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at top,
-    rgba(255,255,255,.08),
-    transparent 40%);
-    pointer-events:none;
-    z-index:-1;
-}
-
-
-/* ================================
-   HEADER
-================================ */
-
-header {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:25px 8%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:1000;
-    backdrop-filter:blur(15px);
-    background:rgba(0,0,0,.45);
-}
-
-
-.logo {
-    font-size:28px;
-    font-weight:900;
-    letter-spacing:3px;
-    text-transform:uppercase;
-}
-
-
-.logo span {
-    color:#888;
-}
-
-
-nav a {
-
-    color:white;
-    text-decoration:none;
-    margin-left:35px;
-    font-size:14px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    position:relative;
-
-}
-
-
-nav a::after {
-
-    content:"";
-    position:absolute;
-    bottom:-8px;
-    left:0;
-    width:0;
-    height:2px;
-    background:white;
-    transition:.4s;
-
-}
-
-
-nav a:hover::after {
-    width:100%;
-}
-
-
-
-/* ================================
-   HERO
-================================ */
-
-
-.hero {
-
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-
-}
-
-
-.hero-content {
-
-    animation:heroEnter 1.5s ease forwards;
-
-}
-
-
-.hero h1 {
-
-    font-size:clamp(50px,10vw,130px);
-    font-weight:900;
-    letter-spacing:-5px;
-}
-
-
-.hero p {
-
-    margin-top:25px;
-    color:var(--gray);
-    font-size:20px;
-
-}
-
-
-
-@keyframes heroEnter {
-
-from {
-
-opacity:0;
-transform:translateY(80px);
-
-}
-
-to {
-
-opacity:1;
-transform:none;
-
-}
-
-}
-
-
-/* ================================
- BUTTONS
-================================ */
-
-
-.btn {
-
-display:inline-block;
-margin-top:40px;
-padding:16px 40px;
-border:1px solid white;
-color:white;
-text-decoration:none;
-text-transform:uppercase;
-letter-spacing:3px;
-transition:var(--transition);
-position:relative;
-overflow:hidden;
-
-}
-
-
-.btn:hover {
-
-background:white;
-color:black;
-transform:translateY(-5px);
-
-}
-
-
-/* ================================
- SECTIONS
-================================ */
-
-
-section {
-
-padding:120px 8%;
-
-}
-
-
-.section-title {
-
-font-size:60px;
-margin-bottom:60px;
-font-weight:900;
-
-}
-
-
-/* ================================
- GALLERY
-================================ */
-
-
-.gallery-grid {
-
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(280px,1fr));
-gap:35px;
-
-}
-
-
-
-.art-card {
-
-position:relative;
-overflow:hidden;
-background:#111;
-cursor:pointer;
-box-shadow:var(--shadow);
-
-}
-
-
-
-.art-card img {
-
-width:100%;
-height:450px;
-object-fit:cover;
-transition:1s;
-
-}
-
-
-
-.art-card:hover img {
-
-transform:scale(1.1);
-
-}
-
-
-
-.art-card::after {
-
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(
-transparent,
-rgba(0,0,0,.9)
-);
-
-}
-
-
-
-.art-info {
-
-position:absolute;
-bottom:25px;
-left:25px;
-z-index:2;
-
-}
-
-
-.art-info h3 {
-
-font-size:25px;
-
-}
-
-
-/* ================================
- CARDS
-================================ */
-
-
-.card {
-
-background:#0d0d0d;
-border:1px solid var(--border);
-padding:35px;
-transition:var(--transition);
-
-}
-
-
-.card:hover {
-
-transform:translateY(-15px);
-border-color:white;
-
-}
-
-
-
-/* ================================
- SCROLL ANIMATION
-================================ */
-
-
-.reveal {
-
-opacity:0;
-transform:translateY(60px);
-transition:1s ease;
-
-}
-
-
-.reveal.active {
-
-opacity:1;
-transform:none;
-
-}
-
-
-
-/* ================================
- LIGHTBOX
-================================ */
-
-
-.lightbox {
-
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.95);
-display:flex;
-justify-content:center;
-align-items:center;
-opacity:0;
-pointer-events:none;
-transition:.5s;
-z-index:2000;
-
-}
-
-
-.lightbox.active {
-
-opacity:1;
-pointer-events:auto;
-
-}
-
-
-.lightbox img {
-
-max-width:90%;
-max-height:90%;
-transform:scale(.8);
-transition:.5s;
-
-}
-
-
-.lightbox.active img {
-
-transform:scale(1);
-
-}
-
-
-
-/* ================================
- MOBILE
-================================ */
-
-
-@media(max-width:768px){
-
-
-header {
-
-padding:20px;
-
-}
-
-
-nav a {
-
-margin-left:15px;
-font-size:11px;
-
-}
-
-
-.section-title {
-
-font-size:40px;
-
-}
-
-
-.art-card img {
-
-height:350px;
-
-}
-
-
-}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkManga - Art by Scar</title>
+
+  <!-- Font e Icone -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Foglio di stile esterno -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HOMEPAGE HERO -->
+  <div id="homePage" class="hero-landing">
+    <header>
+      <div class="logo-container">
+        <a id="siteLogo" class="brand-badge" onclick="switchPage('homePage')">darkmanga</a>
+      </div>
+
+      <nav>
+        <a class="active" onclick="switchPage('homePage')">Home</a>
+        <a onclick="switchPage('galleryPage')">Gallery</a>
+        <a onclick="switchPage('aboutPage')">About</a>
+        <a onclick="switchPage('eventsPage')">Events</a>
+        <a onclick="switchPage('commissionsPage')">Commissions</a>
+        <a onclick="switchPage('shopPage')">Shop</a>
+      </nav>
+    </header>
+
+    <div class="hero-center">
+      <h1 class="hero-title" id="siteTitle">Art by Scar</h1>
+      <p class="hero-subtitle" id="siteSlogan">Digital Artist</p>
+      
+      <div class="social-links" id="socialBox"></div>
+    </div>
+
+    <div></div>
+  </div>
+
+  <!-- GALLERIA -->
+  <div id="galleryPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Gallery</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="aboutPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">About Scar</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="about-container">
+      <p id="bioText"></p>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div id="eventsPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Events</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="eventsGrid"></div>
+  </div>
+
+  <!-- COMMISSIONS -->
+  <div id="commissionsPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Commissions</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="form-wrapper">
+      <form action="https://formspree.io/f/moqgqgyy" method="POST">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" name="name" required placeholder="Il tuo nome">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="La tua email">
+        </div>
+        <div class="form-group">
+          <label>Messaggio</label>
+          <textarea name="message" rows="5" required placeholder="Descrivi la commissione..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Invia</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+  <div id="shopPage" class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">Shop</h2>
+      <button class="back-btn" onclick="switchPage('homePage')">&larr; Torna alla Home</button>
+    </div>
+    <div class="cards-grid" id="shopGrid"></div>
+  </div>
+
+  <!-- LIGHTBOX (MODALE INGRANDIMENTO IMMAGINE) -->
+  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightboxImg" src="" alt="Zoom disegno">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
+
+<!-- IMPORTANTE: carica PRIMA i dati di disegni.js, POI la logica di script.js -->
+  <script src="disegni.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
