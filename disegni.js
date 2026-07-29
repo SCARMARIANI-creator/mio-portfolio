@@ -1,10 +1,3 @@
-const infoArtista = {
-  nomeLogo: "darkmanga",
-  nome: "Art by Scar",
-  slogan: "Digital Artist",
-  biografia: "Benvenuti nel mio portfolio artistico DarkManga. Qui troverai le mie opere, eventi e informazioni per le commissioni."
-};
-
 const mieiDisegni = [
   {
     titolo: "Ritratto a Matita Collab",
